@@ -1,8 +1,43 @@
 body {
-    padding: 30px 100px;
     font-family: Arial, sans-serif;
-    height: 100%;
     margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+main {
+    padding-top: 50px; /* Adjust for fixed header */
+}
+
+section {
+    padding: 20px;
+    margin: 20px 0;
 }
 
 

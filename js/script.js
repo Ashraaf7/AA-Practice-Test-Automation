@@ -1,4 +1,10 @@
-function toggleSection(sectionId) {
+function openSection(sectionUrl) {
+    window.open(sectionUrl, '_blank');
+}
+
+  
+  // Function to toggle visibility of sections
+  function toggleSection(sectionId) {
     var section = document.getElementById(sectionId);
     if (section.classList.contains('hidden')) {
         section.classList.remove('hidden');
@@ -7,6 +13,18 @@ function toggleSection(sectionId) {
         section.classList.remove('visible');
         section.classList.add('hidden');
     }
+}
+ // Function to scroll to a specific section
+ function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        console.log(section)
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+function toggleAndScroll(sectionId) {
+    toggleSection(sectionId); // Toggle section visibility
+    scrollToSection(sectionId); // Scroll to the section
 }
 
 // Function to check if an element is in the viewport
