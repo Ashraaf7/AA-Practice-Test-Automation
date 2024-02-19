@@ -4,7 +4,7 @@ function openSection(sectionUrl) {
 
 function logout() {
     // Redirect the user back to the login page
-    window.location.href = '../prod.html'; // Change '../index.html' to the actual path of your login page
+    window.location.href = '../index.html'; // Change '../index.html' to the actual path of your login page
 }
 
   
