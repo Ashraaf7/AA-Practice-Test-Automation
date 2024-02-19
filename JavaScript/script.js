@@ -2,6 +2,11 @@ function openSection(sectionUrl) {
     window.open(sectionUrl, '_blank');
 }
 
+function logout() {
+    // Redirect the user back to the login page
+    window.location.href = '../prod.html'; // Change '../index.html' to the actual path of your login page
+}
+
   
   // Function to toggle visibility of sections
   function toggleSection(sectionId) {
@@ -121,21 +126,17 @@ function onDragOver(event) {
     event.preventDefault(); // Prevent default behavior of the browser
 }
 
-
-
-
-
-
-// Add event listener to the Choose File button
 document.getElementById('chooseFileBtn').addEventListener('click', function () {
+    console.log("Choose File button clicked");
     document.getElementById('fileInput').click();
 });
 
-// Handle selected files
 document.getElementById('fileInput').addEventListener('change', function () {
+    console.log("File input changed");
     const files = this.files;
     handleFiles(files);
 });
+
 
 function handleFiles(files) {
     const fileList = document.getElementById('fileList');

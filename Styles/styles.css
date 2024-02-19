@@ -1,18 +1,121 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset default styles */
+/* Reset default browser styles */
+body, h1, p, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    
+}
+.logout
+{
+
+}
+.google
+{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.logo
+{
+    height: 100%;
+
+}
+.logo img {
+    height: 100%;
+}
+
+.nav-links li {
+    display: inline;
+    margin-left: 20px;
+    
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.slider-navigation {
+    background-color: #fff;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+
+.lw-topbar-menu {
     margin: 0;
     padding: 0;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+.lw-topbar-options {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
+
+.lw-topbar-option {
+    margin-right: 10px;
+}
+
+.lw-topbar-option:last-child {
+    margin-right: 0;
+}
+
+ /* Additional CSS styles for the login credentials */
+ .login-credentials {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-credentials h2 {
+    font-weight: bold;
+}
+
+.login-credentials h3 {
+    font-weight: bold;
+    color: #007bff; /* Blue color */
+}
+
+.lw-topbar-option button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lw-topbar-option button:hover {
+    background-color: #0056b3;
+}
+
 
 button {
     background-color: #4CAF50;
@@ -40,11 +143,18 @@ section {
     margin: 20px 0;
 }
 
-
+form{
+    height: 50%;
+}
 .login-container {
-    max-width: 330px;
+    max-width: 40%;
+    height: 500px;
     padding: 15px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
 }
 
 .image-container {
