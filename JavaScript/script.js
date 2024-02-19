@@ -1,5 +1,5 @@
 function openSection(sectionUrl) {
-    window.open(sectionUrl, '_blank');
+    window.location.href=sectionUrl;
 }
 
 function logout() {
@@ -130,6 +130,7 @@ document.getElementById('chooseFileBtn').addEventListener('click', function () {
     console.log("Choose File button clicked");
     document.getElementById('fileInput').click();
 });
+
 
 document.getElementById('fileInput').addEventListener('change', function () {
     console.log("File input changed");

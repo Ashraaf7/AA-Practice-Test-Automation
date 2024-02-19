@@ -65,27 +65,10 @@ footer {
     overflow-x: auto;
     white-space: nowrap;
     padding: 10px 0;
+    
 }
 
-.lw-topbar-menu {
-    margin: 0;
-    padding: 0;
-}
 
-.lw-topbar-options {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.lw-topbar-option {
-    margin-right: 10px;
-}
-
-.lw-topbar-option:last-child {
-    margin-right: 0;
-}
 
  /* Additional CSS styles for the login credentials */
  .login-credentials {
@@ -101,21 +84,28 @@ footer {
     font-weight: bold;
     color: #007bff; /* Blue color */
 }
+.lw-topbar-options {
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    gap: 10px; /* Spacing between items */
+    padding: 20px;
 
-.lw-topbar-option button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.lw-topbar-option button:hover {
-    background-color: #0056b3;
+.lw-topbar-option {
+    list-style: none; /* Remove default list styles */
 }
 
+.lw-topbar-option a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+    font-size: 15px; /* Adjust font size as needed */
+    font-weight: bolder; /* Apply bold font weight */
+}
+
+.lw-topbar-option a:hover {
+    color: #007bff; /* Change color on hover */
+}
 
 button {
     background-color: #4CAF50;
@@ -134,9 +124,7 @@ button:hover {
     background-color: #45a049;
 }
 
-main {
-    padding-top: 50px; /* Adjust for fixed header */
-}
+
 
 section {
     padding: 20px;
@@ -156,7 +144,45 @@ form{
     justify-content: space-evenly;
 
 }
+section h2 {
+    border-bottom: 1px solid #ccc;
+    margin-top: 0;
+    padding-bottom: 0.5em;
+}
 
+.paragraph {
+    text-align: justify;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #333; /* Adjust text color */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Change font family if needed */
+}
+
+.social-media {
+    display: flexbox;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.icon {
+    width: 2em;
+    height: 2em;
+    margin-right: 0.5em; /* Adjusted margin */
+}
+
+.text-link {
+    text-decoration: none;
+    color: "#0056b3"; 
+    font-size: larger;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
 .image-container {
     display: flex;
     justify-content: center;
@@ -187,11 +213,20 @@ form{
     display: block;
 }
 
-#dropZone {
-    border: 2px dashed #4AAE9B;
+.drag-drop-container {
+    margin-top: 20px;
     padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+}
+
+#dropZone {
+    padding: 20px;
+    border: 2px dashed #aaa;
+    border-radius: 5px;
     text-align: center;
     cursor: pointer;
+    background-color: #f9f9f9;
 }
 
 #fileList {
@@ -205,4 +240,20 @@ form{
 /* Hide the file input */
 #fileInput {
     display: none;
+}
+
+#chooseFileBtn {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding for the button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    cursor: pointer; /* Add cursor pointer for hover effect */
+    justify-items: auto;
+    margin-left: 3%;
+
+}
+
+#chooseFileBtn:hover {
+    background-color: #0056b3; /* Darker blue background color on hover */
 }

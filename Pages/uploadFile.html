@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>Upload Files</title>
     <link rel="icon" href="../Images/test-automation-practice-logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
@@ -18,7 +18,7 @@
                 <img src="../Images/test-automation-practice-logo.png" alt="Logo">
             </div>
             <ul class="nav-links">
-                <li><a href="#">Home</a> </li>
+                <li><a href="main.html">Home</a> </li>
                 <li><a href="/Pages/about.html">About</a></li>
             </ul>
             </div>
@@ -26,19 +26,17 @@
             <button class="btn btn-primary logout" onclick="logout()">Logout</button>
         </nav>
     </header>
-            <ul class="lw-topbar-options">
-                <li class="lw-topbar-option"><a href="tables.html">1. Show Table</a></li>
-                <li class="lw-topbar-option"><a href="checkbox_Radio.html">2. Show Checkboxes and Radio</a></li>
-                <li class="lw-topbar-option"><a href="dragDrop.html">3. Drag and Drop</a></li>
-                <li class="lw-topbar-option"><a href="scrolling.html">4. Scrolling</a></li>
-                <li class="lw-topbar-option"><a href="uploadFile.html">4. Upload Files</a></li>
-
-
-
-            </ul>
 
     
- 
+    <div class="mt-4 text-center">
+        <h3>Upload your file here, if you can 👽</h3>
+    </div>
+    <div>
+        <button type="button" id="chooseFileBtn" class="btn btn-secondary">Choose File</button>
+        <input type="file" id="fileInput" multiple> <!-- Hidden file input -->
+    </div>
+    
+    
     <script src="../JavaScript/script.js"></script>
 </body>
 </html>
