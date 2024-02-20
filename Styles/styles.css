@@ -242,7 +242,7 @@ footer {
     display: none;
 }
 
-#chooseFileBtn {
+#chooseFileBtn,#riClickBtn,#dblClickBtn {
     background-color: #007bff; /* Blue background color */
     color: #fff; /* White text color */
     padding: 10px 20px; /* Padding for the button */
@@ -250,9 +250,22 @@ footer {
     border-radius: 5px; /* Add border-radius for rounded corners */
     cursor: pointer; /* Add cursor pointer for hover effect */
     justify-items: auto;
-    margin-left: 3%;
-
+    margin: 40px;
+ 
 }
+
+#regularFileInput{
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding for the button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    cursor: pointer; /* Add cursor pointer for hover effect */
+    justify-items: auto;
+    margin: 50px;
+}
+
+
 
 #chooseFileBtn:hover {
     background-color: #0056b3; /* Darker blue background color on hover */

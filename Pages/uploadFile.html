@@ -26,17 +26,24 @@
             <button class="btn btn-primary logout" onclick="logout()">Logout</button>
         </nav>
     </header>
+    <div class="mt-4 text-center">
+        <h3>Upload your file here</h3>
 
+        <input type="file" id="regularFileInput" class="btn btn-secondary text-center" multiple>
+        <ul id="regularFileList"></ul>
+    </div>
+    
     
     <div class="mt-4 text-center">
         <h3>Upload your file here, if you can 👽</h3>
+        <div>
+            <button type="button" id="chooseFileBtn" class="btn btn-secondary text-center">Choose File </button>
+            <ul id="fileList" class="btn btn-secondary text-center" style="display: none;"></ul>
+        </div>
+        
     </div>
-    <div>
-        <button type="button" id="chooseFileBtn" class="btn btn-secondary">Choose File</button>
-        <input type="file" id="fileInput" multiple> <!-- Hidden file input -->
-    </div>
+   
     
-    
-    <script src="../JavaScript/script.js"></script>
+    <script src="../JavaScript/uploadFiles.js"></script>
 </body>
 </html>
