@@ -3,8 +3,10 @@ function openSection(sectionUrl) {
 }
 
 function logout() {
+    // Remove isLoggedIn when the user logs out
+    sessionStorage.setItem('isLoggedIn', false);
     // Redirect the user back to the login page
-    window.location.href = '../index.html'; // Change '../index.html' to the actual path of your login page
+    window.location.href = '../index.html'; 
 }
 
   
@@ -19,4 +21,24 @@ function logout() {
         section.classList.add('hidden');
     }
 }
+
+
+
+
+// Function to check login status
+function checkLoginStatus(url) {
+    // Retrieve login status from session storage
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    
+    // If the user is not logged in, redirect to the login page
+    if (!isLoggedIn || isLoggedIn === 'false') {
+        console.log('User not logged in. Redirecting to login page...');
+        window.location.href = '../index.html'; // Redirect to login page
+    }
+    else
+    {
+        window.location.href = url;
+    }
+}
+
 

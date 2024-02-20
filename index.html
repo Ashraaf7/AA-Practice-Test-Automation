@@ -17,7 +17,13 @@
         <nav>
             <div class="google">
                 <div class="logo">
-                <img src="Images/test-automation-practice-logo.png" alt="Logo">
+                <img src="../Images/test-automation-practice-logo.png" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a> </li>
+                <li><a href="../Pages/about.html">About</a></li>
+            </ul>
+            </div>
         </nav>
     </header>
     <div class="login-container">
@@ -43,26 +49,6 @@
         <h4>Username: <span style="color: red;">admin</span></h4>
         <h4>Password: <span style="color: red;">admin</span></h4>
     </div>
-    <script>
-        //Handle login 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('loginForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission
-
-                // Get the input values
-                var username = document.getElementById('inputUsername').value;
-                var password = document.getElementById('inputPassword').value;
-
-                // Check if the username and password match
-                if (username === 'admin' && password === 'admin') {
-                    // Redirect to the main page
-                    window.location.href = 'Pages/main.html';
-                } else {
-                    // Display an error message (optional)
-                    alert('Invalid username or password. Please try again.');
-                }
-            });
-        });
-    </script>
+    <script src="JavaScript/login.js"></script>
 </body>
 </html>
