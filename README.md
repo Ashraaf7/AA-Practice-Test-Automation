@@ -1,6 +1,7 @@
 # Web Automation Practice Project
 
 This repository contains a web automation practice project using Selenium (or any other framework you prefer). The project aims to provide hands-on practice with web automation techniques for testing or other purposes.
+You can access it here: https://ashraaf7.github.io/AA-Practice-Test-Automation/
 
 ## Getting Started
 
