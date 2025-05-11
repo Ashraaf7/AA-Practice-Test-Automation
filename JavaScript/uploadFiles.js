@@ -1,23 +1,18 @@
-document.getElementById('chooseFileBtn').addEventListener('click', function () {
-    // Create a new file input element
-    var fileInput = document.createElement('input');
-    fileInput.setAttribute('type', 'file');
-    fileInput.setAttribute('id', 'fileInput');
-    fileInput.setAttribute('multiple', 'multiple');
-    fileInput.style.display = 'none'; // Hide the file input
+  document.getElementById("chooseFileBtn").addEventListener("click", function () {
+    document.getElementById("fileInput").click();
+  });
 
-    // Append the file input to the document body
-    document.body.appendChild(fileInput);
+  document.getElementById("fileInput").addEventListener("change", function (e) {
+    const fileList = document.getElementById("fileList");
+    fileList.innerHTML = "";
+    for (const file of e.target.files) {
+      const li = document.createElement("li");
+      li.textContent = file.name;
+      fileList.appendChild(li);
+    }
+  });
 
-    // Trigger a click event on the file input
-    fileInput.click();
 
-    // Listen for changes in the file input
-    fileInput.addEventListener('change', function () {
-        const files = this.files;
-        handleFiles(files);
-    });
-});
 
 function handleFiles(files) {
     const fileList = document.getElementById('fileList');

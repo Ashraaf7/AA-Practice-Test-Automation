@@ -237,10 +237,7 @@ footer {
     list-style: none;
 }
 
-/* Hide the file input */
-#fileInput {
-    display: none;
-}
+
 
 #chooseFileBtn,#riClickBtn,#dblClickBtn {
     background-color: #007bff; /* Blue background color */

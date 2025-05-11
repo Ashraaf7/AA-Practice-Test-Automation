@@ -36,9 +36,10 @@
     
     <div class="mt-4 text-center">
         <h3>Upload your file here, if you can 👽</h3>
-        <div>
+        <div id="fileInputContainer" class="text-center">
             <button type="button" id="chooseFileBtn" class="btn btn-secondary text-center">Choose File </button>
-            <ul id="fileList" class="btn btn-secondary text-center" style="display: none;"></ul>
+            <input type="file" class="btn btn-secondary text-center" id="fileInput" style="display: none;"  multiple>
+            <ul id="fileList" ></ul>
         </div>
         
     </div>
