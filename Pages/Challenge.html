@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  
+      <link rel="icon" href="../Images/test-automation-practice-logo.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+            <link rel="stylesheet" href="../Styles/styles.css">
+          <title>Challenge 1</title>
+    <style>
+      /* Styles for form */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        margin-top: 50px;
+      }
+      label {
+        font-weight: bold;
+      }
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+      .loader {
+        border: 8px solid #f3f3f3; /* Light grey */
+        border-top: 8px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        z-index: 999;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .flash-message {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        z-index: 999;
+        display: none;
+      }
+      .error-message {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        z-index: 999;
+        display: none;
+      }
+    </style>
+  </head>
+
+<header>
+  <nav>
+      <div class="google">
+          <div class="logo">
+          <img src="../Images/test-automation-practice-logo.png" alt="Logo">
+      </div>
+      <ul class="nav-links">
+          <li><a href="../Pages/main.html">Home</a> </li>
+          <li><a href="../Pages/about.html">About</a></li>
+      </ul>
+      </div>
+     
+  </nav>
+</header>
+  <body>
+    <div class="container">
+      <br />
+      <h1>Selenium Challenge</h1>
+
+      <form>
+        <div class="form-group">
+
+          <!-- TEXT FIELDS -->
+          <div class="col-sm-8 col-sm-offset-2">
+            <strong><label for="first-name">First name</label></strong>
+            <input type="text" class="form-control" id="first-name" placeholder="Enter first name">
+          </div>
+          <br />
+
+          <div class="col-sm-8 col-sm-offset-2">
+            <strong><label for="last-name">Last name</label></strong>
+            <input type="text" class="form-control" id="last-name" placeholder="Enter last name">
+          </div>
+          <br />
+
+          <div class="col-sm-8 col-sm-offset-2">
+            <strong><label for="job-title">Job title</label></strong>
+            <input type="text" class="form-control" id="job-title" placeholder="Enter your job title">
+          </div>
+          <br />
+
+          <!-- RADIO BUTTONS -->
+          <div class="input-group">
+            <div class="col-sm-8 col-sm-offset-2">
+              <strong><label for="radio-button">Highest level of education</label></strong>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <input type="radio" id="radio-button-1" aria-label="Radio button" value="radio-button-1" name="education-level">
+              High School
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <input type="radio" id="radio-button-2" aria-label="Radio button" value="radio-button-2" name="education-level">
+              College
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <input type="radio" id="radio-button-3" aria-label="Radio button" value="radio-button-3" name="education-level">
+              Grad School
+            </div>
+          </div>
+          <br />
+
+          <!-- CHECKBOXES -->
+          <div class="input-group">
+            <div class="col-sm-8 col-sm-offset-2">
+              <strong><label for="radio-button">Gender</label></strong>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <input type="checkbox" id="checkbox-1" aria-label="checkbox" value="checkbox-1" name="gender">
+              Male
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <input type="checkbox" id="checkbox-2" aria-label="checkbox" value="checkbox-2" name="gender">
+              Female
+            </div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <input type="checkbox" id="checkbox-3" aria-label="checkbox" value="checkbox-3" name="gender">
+              Prefer not to say
+            </div>
+          </div>
+          <br />
+
+          <!-- DROPDOWN/ SELECT -->
+          <div class="col-sm-4 col-sm-offset-2">
+            <strong><label for="select-menu">Years of experience:</label></strong>
+            <select class="form-control" id="select-menu">
+              <option value="0" selected>Select an option</option>
+              <option value="1">0-1</option>
+              <option value="2">2-4</option>
+              <option value="3">5-9</option>
+              <option value="4">10+</option>
+            </select>
+          </div>
+          <br />
+
+          <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-lg btn-primary" id="submit-btn">Submit</button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+
+    <div class="loader" id="loader"></div>
+    <div class="flash-message" id="flash-message">
+      Success
+    </div>
+    <div class="error-message" id="error-message">
+      Please fill in all fields.
+    </div>
+
+    <script>
+      // Script to show flash message on form submission
+      document.getElementById('submit-btn').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        // Simulate loader for 4 seconds
+        document.getElementById('loader').style.display = 'block';
+        setTimeout(function() {
+          document.getElementById('loader').style.display = 'none';
+
+          // Check if all fields are filled
+          var firstName = document.getElementById('first-name').value;
+          var lastName = document.getElementById('last-name').value;
+          var jobTitle = document.getElementById('job-title').value;
+          var selectMenu = document.getElementById('select-menu').value;
+          var radioButtons = document.querySelectorAll('input[name="education-level"]:checked');
+          var checkboxes = document.querySelectorAll('input[name="gender"]:checked');
+
+          if (firstName && lastName && jobTitle && selectMenu != '0' && radioButtons.length > 0 && checkboxes.length > 0) {
+            document.getElementById('flash-message').style.display = 'block'; // Show flash message
+          } else {
+            document.getElementById('error-message').style.display = 'block'; // Show error message
+          }
+        }, 4000);
+      });
+    </script>
+  </body>
+</html>
