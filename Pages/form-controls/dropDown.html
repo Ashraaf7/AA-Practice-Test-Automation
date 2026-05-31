@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Selection - Test Automation Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+        <script src="../../components/include.js"></script>
+</head>
+<body>
+    <a href="#dropdown-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+      <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+    <main id="dropdown-main" class="container" style="padding: 2rem 0;" role="main" tabindex="-1">
+        <div class="page-header">
+            <h1 class="page-title">Dropdown Selection</h1>
+            <p class="page-subtitle">Practice selecting options from dropdowns and lists</p>
+        </div>
+        <section>
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 2</span>
+                    Select from Dropdown
+                </h3>
+                <p class="text-muted">Select your years of experience from the dropdown menu below. Once selected, you will see a success message confirming your selection.</p>
+                
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Click the dropdown menu</li>
+                        <li>Select one of the experience options</li>
+                        <li>A success message will confirm your selection</li>
+                    </ol>
+                </div>
+
+                <div class="form-group" style="margin: 2rem 0; max-width: 300px;">
+                    <label for="experience-dropdown" class="form-label">Years of Experience</label>
+                    <select class="form-select" id="experience-dropdown" data-testid="experience-dropdown">
+                        <option value="" selected>Select an option</option>
+                        <option value="0-1">0-1 Years</option>
+                        <option value="2-4">2-4 Years</option>
+                        <option value="5-9">5-9 Years</option>
+                        <option value="10+">10+ Years</option>
+                    </select>
+                </div>
+
+                <!-- Assertion Message -->
+                <div class="assertion-message success" id="assertion-message" data-testid="assertion-message" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="selection-text" data-testid="selection-text">Option selected successfully!</span>
+                </div>
+
+                <!-- Demo Result -->
+                <div class="demo-result empty" id="demo-result" data-testid="demo-result">
+                    Select an option to see the result...
+                </div>
+
+                <!-- Task Result Container -->
+                <div class="task-result" id="task-result" style="display: none;">
+                    <h5>Test Results</h5>
+                    <p><strong>Status:</strong> <span id="status-text" style="color: #22c55e; font-weight: 600;">✓ Passed</span></p>
+                    <p><strong>Action:</strong> <code>select()</code></p>
+                    <p><strong>Element:</strong> <code>#experience-dropdown</code></p>
+                    <p><strong>Expected Result:</strong> Dropdown value selected</p>
+                    <p><strong>Actual Result:</strong> <span id="actual-result">Value selected: <code id="selected-value"></code></span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chained / Dependent Dropdowns -->
+        <section style="margin-top: 3rem;">
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 3b</span>
+                    Chained / Dependent Dropdowns
+                </h3>
+                <p class="text-muted">Select a continent first, then a city will populate based on your selection. The second dropdown depends on the first.</p>
+
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Select a continent from the first dropdown</li>
+                        <li>The city dropdown will enable and populate</li>
+                        <li>Select a city to complete the task</li>
+                    </ol>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="continent-select" class="form-label">Select Continent</label>
+                            <select class="form-select" id="continent-select" data-testid="continent-select">
+                                <option value="">-- Choose a continent --</option>
+                                <option value="africa">Africa</option>
+                                <option value="asia">Asia</option>
+                                <option value="europe">Europe</option>
+                                <option value="americas">Americas</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="city-select" class="form-label">Select City</label>
+                            <select class="form-select" id="city-select" disabled data-testid="city-select">
+                                <option value="">-- Choose continent first --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assertion-message success" id="chained-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="chained-text">Selection complete!</span>
+                </div>
+                <div class="demo-result empty" id="chained-result">
+                    Select continent then city to see the result...
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Div-Based Dropdown -->
+        <section style="margin-top: 3rem;">
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 3c</span>
+                    Custom Dropdown (div-based)
+                </h3>
+                <p class="text-muted">This dropdown is built from <code>&lt;div&gt;</code> elements — not a native <code>&lt;select&gt;</code>. You must click to open it, then click an option.</p>
+
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Click the dropdown toggle to open it</li>
+                        <li>Click an option from the list</li>
+                        <li>The selection will be confirmed</li>
+                    </ol>
+                </div>
+
+                <style>
+                    .custom-dropdown { position: relative; max-width: 350px; margin: 2rem 0; }
+                    .custom-dropdown-toggle { width: 100%; padding: 0.75rem 1rem; background: #fff; border: 2px solid var(--border-color); border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; transition: var(--transition); }
+                    .custom-dropdown-toggle:hover { border-color: var(--primary); }
+                    .custom-dropdown-toggle.open { border-color: var(--primary); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+                    .custom-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 2px solid var(--primary); border-top: none; border-radius: 0 0 8px 8px; box-shadow: var(--shadow-md); z-index: 100; }
+                    .custom-dropdown-menu.open { display: block; }
+                    .custom-dropdown-option { padding: 0.65rem 1rem; cursor: pointer; transition: background 0.2s; }
+                    .custom-dropdown-option:hover { background: #eef2ff; color: var(--primary); }
+                    .custom-dropdown-option:last-child { border-radius: 0 0 6px 6px; }
+                </style>
+
+                <div class="custom-dropdown" id="custom-dropdown" data-testid="custom-dropdown">
+                    <div class="custom-dropdown-toggle" id="custom-dropdown-toggle" data-testid="custom-dropdown-toggle">
+                        <span id="custom-dropdown-label">-- Choose a language --</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="custom-dropdown-menu" id="custom-dropdown-menu">
+                        <div class="custom-dropdown-option" id="option-python" data-value="python" data-testid="option-python">🐍 Python</div>
+                        <div class="custom-dropdown-option" id="option-java" data-value="java" data-testid="option-java">☕ Java</div>
+                        <div class="custom-dropdown-option" id="option-javascript" data-value="javascript" data-testid="option-javascript">⚡ JavaScript</div>
+                        <div class="custom-dropdown-option" id="option-csharp" data-value="csharp" data-testid="option-csharp">🔷 C#</div>
+                        <div class="custom-dropdown-option" id="option-ruby" data-value="ruby" data-testid="option-ruby">💎 Ruby</div>
+                    </div>
+                </div>
+
+                <div class="assertion-message success" id="custom-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="custom-text">Language selected!</span>
+                </div>
+                <div class="demo-result empty" id="custom-result">
+                    Open the custom dropdown and select a language...
+                </div>
+            </div>
+        </section>
+
+        <!-- Multi-Select List -->
+        <section style="margin-top: 3rem;">
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 3d</span>
+                    Multi-Select List
+                </h3>
+                <p class="text-muted">Hold <code>Ctrl</code> (or <code>Cmd</code> on Mac) and click to select multiple items. Practice multi-select interactions.</p>
+
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Hold Ctrl/Cmd and click to select multiple skills</li>
+                        <li>Selected items will be highlighted</li>
+                        <li>A confirmation shows all your selections</li>
+                    </ol>
+                </div>
+
+                <div class="form-group" style="margin: 2rem 0; max-width: 350px;">
+                    <label for="skills-select" class="form-label">Select Skills (hold Ctrl/Cmd for multiple)</label>
+                    <select class="form-select" id="skills-select" multiple size="7" data-testid="skills-select" style="height: auto;">
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="selenium">Selenium</option>
+                        <option value="cypress">Cypress</option>
+                        <option value="playwright">Playwright</option>
+                        <option value="appium">Appium</option>
+                    </select>
+                </div>
+
+                <div class="assertion-message success" id="multi-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="multi-text">Skills selected!</span>
+                </div>
+                <div class="demo-result empty" id="multi-result">
+                    Select one or more skills above...
+                </div>
+            </div>
+        </section>
+
+        <!-- Select by Index / Value / Text -->
+        <section style="margin-top: 3rem;">
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 3e</span>
+                    Select by Index / Value / Text
+                </h3>
+                <p class="text-muted">Practice different selection methods: by visible text, by value attribute, or by index position.</p>
+
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Select a priority from the dropdown</li>
+                        <li>The result shows the value, text, and index of your selection</li>
+                        <li>Try each priority to see different selection data</li>
+                    </ol>
+                </div>
+
+                <div class="form-group" style="margin: 2rem 0; max-width: 300px;">
+                    <label for="priority-select" class="form-label">Task Priority</label>
+                    <select class="form-select" id="priority-select" data-testid="priority-select">
+                        <option value="" selected>-- Select priority --</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                </div>
+
+                <div class="assertion-message success" id="priority-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="priority-text">Priority selected!</span>
+                </div>
+                <div class="demo-result empty" id="priority-result">
+                    Select a priority to see selection details...
+                </div>
+                <div class="task-result" id="priority-details" style="display: none;">
+                    <h5>Selection Details</h5>
+                    <p><strong>Visible Text:</strong> <code id="sel-text"></code></p>
+                    <p><strong>Value Attribute:</strong> <code id="sel-value"></code></p>
+                    <p><strong>Index Position:</strong> <code id="sel-index"></code></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../JavaScript/script.js"></script>
+    <script>
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+
+        $(document).ready(function() {
+            // Task 3a - Original dropdown
+            $('#experience-dropdown').on('change', function() {
+                var selectedValue = $(this).val();
+                var selectedText = $(this).find('option:selected').text();
+                
+                if (selectedValue !== '') {
+                    var assertionMsg = $('#assertion-message');
+                    assertionMsg.removeClass('error').addClass('success');
+                    $('#selection-text').text('Successfully selected: ' + selectedText);
+                    assertionMsg.show();
+                    $('#demo-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ Selected: ' + selectedText + '</strong>');
+                    $('#selected-value').text(selectedValue);
+                    $('#task-result').show();
+                } else {
+                    $('#assertion-message').hide();
+                    $('#demo-result').addClass('empty').html('Select an option to see the result...');
+                    $('#task-result').hide();
+                }
+            });
+
+            // Task 3b - Chained Dropdowns
+            var cityData = {
+                africa: ['Cairo', 'Lagos', 'Nairobi', 'Cape Town', 'Casablanca'],
+                asia: ['Tokyo', 'Dubai', 'Mumbai', 'Shanghai', 'Seoul'],
+                europe: ['London', 'Paris', 'Berlin', 'Rome', 'Madrid'],
+                americas: ['New York', 'Toronto', 'São Paulo', 'Mexico City', 'Buenos Aires']
+            };
+
+            $('#continent-select').on('change', function() {
+                var continent = $(this).val();
+                var citySelect = $('#city-select');
+                citySelect.empty();
+                if (continent && cityData[continent]) {
+                    citySelect.prop('disabled', false);
+                    citySelect.append('<option value="">-- Choose a city --</option>');
+                    cityData[continent].forEach(function(city) {
+                        citySelect.append('<option value="' + city.toLowerCase().replace(/\s/g, '-') + '">' + city + '</option>');
+                    });
+                } else {
+                    citySelect.prop('disabled', true);
+                    citySelect.append('<option value="">-- Choose continent first --</option>');
+                    $('#chained-assertion').hide();
+                    $('#chained-result').addClass('empty').text('Select continent then city to see the result...');
+                }
+            });
+
+            $('#city-select').on('change', function() {
+                var city = $(this).find('option:selected').text();
+                var continent = $('#continent-select').find('option:selected').text();
+                if ($(this).val()) {
+                    $('#chained-text').text('Selected: ' + city + ' (' + continent + ')');
+                    $('#chained-assertion').show();
+                    $('#chained-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ ' + continent + ' → ' + city + '</strong>');
+                }
+            });
+
+            // Task 3c - Custom Div Dropdown
+            var toggle = document.getElementById('custom-dropdown-toggle');
+            var menu = document.getElementById('custom-dropdown-menu');
+
+            toggle.addEventListener('click', function() {
+                toggle.classList.toggle('open');
+                menu.classList.toggle('open');
+            });
+
+            document.querySelectorAll('.custom-dropdown-option').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    var val = this.textContent.trim();
+                    document.getElementById('custom-dropdown-label').textContent = val;
+                    toggle.classList.remove('open');
+                    menu.classList.remove('open');
+                    $('#custom-text').text('Selected: ' + val);
+                    $('#custom-assertion').show();
+                    $('#custom-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ Selected: ' + val + '</strong>');
+                });
+            });
+
+            // Close custom dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!document.getElementById('custom-dropdown').contains(e.target)) {
+                    toggle.classList.remove('open');
+                    menu.classList.remove('open');
+                }
+            });
+
+            // Task 3d - Multi-Select
+            $('#skills-select').on('change', function() {
+                var selected = $(this).val();
+                if (selected && selected.length > 0) {
+                    var names = [];
+                    $(this).find('option:selected').each(function() { names.push($(this).text()); });
+                    $('#multi-text').text('Selected ' + selected.length + ' skill(s): ' + names.join(', '));
+                    $('#multi-assertion').show();
+                    $('#multi-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ ' + names.join(', ') + '</strong>');
+                } else {
+                    $('#multi-assertion').hide();
+                    $('#multi-result').addClass('empty').text('Select one or more skills above...');
+                }
+            });
+
+            // Task 3e - Select by Index/Value/Text
+            $('#priority-select').on('change', function() {
+                var val = $(this).val();
+                var text = $(this).find('option:selected').text();
+                var idx = this.selectedIndex;
+                if (val) {
+                    $('#priority-text').text('Priority set to: ' + text);
+                    $('#priority-assertion').show();
+                    $('#priority-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ Priority: ' + text + '</strong>');
+                    $('#sel-text').text(text);
+                    $('#sel-value').text(val);
+                    $('#sel-index').text(idx);
+                    $('#priority-details').show();
+                } else {
+                    $('#priority-assertion').hide();
+                    $('#priority-result').addClass('empty').text('Select a priority to see selection details...');
+                    $('#priority-details').hide();
+                }
+            });
+        });
+    </script>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+</body>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

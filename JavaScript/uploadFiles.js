@@ -1,3 +1,27 @@
+  // Show/hide global loading spinner overlay
+  function showLoadingSpinner(show) {
+    var spinner = document.getElementById('globalLoading');
+    if (spinner) {
+      spinner.style.display = show ? 'flex' : 'none';
+      if (show) spinner.classList.add('active');
+      else spinner.classList.remove('active');
+    }
+  }
+
+  // Show Bootstrap alert dynamically for file upload feedback
+  function showUploadAlert(message, type) {
+    let alertBox = document.getElementById('uploadAlert');
+    if (!alertBox) {
+      alertBox = document.createElement('div');
+      alertBox.id = 'uploadAlert';
+      alertBox.className = 'alert alert-' + type + ' mt-3';
+      alertBox.setAttribute('role', 'alert');
+      document.body.prepend(alertBox);
+    }
+    alertBox.textContent = message;
+    alertBox.style.display = 'block';
+    setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
+  }
   document.getElementById("chooseFileBtn").addEventListener("click", function () {
     document.getElementById("fileInput").click();
   });

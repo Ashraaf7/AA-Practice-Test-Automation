@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Testing Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+</head>
+<body>
+    <a href="#visual-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+     <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+    <main id="visual-main" class="container py-5" role="main" tabindex="-1">
+        <div class="text-center mb-4">
+            <h1>Visual Testing Practice</h1>
+            <p class="text-muted">Practice taking screenshots and visual comparisons</p>
+        </div>
+
+        <div class="alert alert-info mb-4">
+            <h5>Visual Testing Concepts</h5>
+            <ul class="mb-0">
+                <li><strong>Full Page Screenshot</strong> - Capture entire page</li>
+                <li><strong>Element Screenshot</strong> - Capture specific element</li>
+                <li><strong>Before/After Comparison</strong> - Compare visual differences</li>
+                <li><strong>Baseline Images</strong> - Reference images for comparison</li>
+            </ul>
+        </div>
+
+        <div class="row g-4">
+            <!-- Elements for Screenshot -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Color Cards (Screenshots)</div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="p-3 text-white text-center rounded" style="background:#0d6efd;" id="blueCard" data-testid="blue-card">
+                                    <h5>Blue Card</h5>
+                                    <p class="mb-0">id="blueCard"</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3 text-white text-center rounded" style="background:#198754;" id="greenCard" data-testid="green-card">
+                                    <h5>Green Card</h5>
+                                    <p class="mb-0">id="greenCard"</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3 text-white text-center rounded" style="background:#dc3545;" id="redCard" data-testid="red-card">
+                                    <h5>Red Card</h5>
+                                    <p class="mb-0">id="redCard"</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3 text-dark text-center rounded" style="background:#ffc107;" id="yellowCard" data-testid="yellow-card">
+                                    <h5>Yellow Card</h5>
+                                    <p class="mb-0">id="yellowCard"</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">Elements with unique IDs for visual testing</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complex UI for Screenshot -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Product Card</div>
+                    <div class="card-body" id="productCard" data-testid="product-card">
+                        <div class="text-center">
+                            <div class="bg-light rounded p-4 mb-3">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <rect width="80" height="80" fill="#e9ecef" rx="10"/>
+                                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#6c757d" font-size="14">Product</text>
+                                </svg>
+                            </div>
+                            <h5>Premium Widget</h5>
+                            <p class="text-muted">High-quality widget for all your needs</p>
+                            <h4 class="text-primary">$99.99</h4>
+                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">id="productCard" for full element screenshot</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screenshot Regions -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Navigation Bar</div>
+                    <div class="card-body p-0" id="navBar" data-testid="nav-bar">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">Brand</a>
+                                <div class="navbar-nav">
+                                    <a class="nav-link active" href="#">Home</a>
+                                    <a class="nav-link" href="#">About</a>
+                                    <a class="nav-link" href="#">Contact</a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">id="navBar" - navbar for screenshot</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table for Visual -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Data Table</div>
+                    <div class="card-body" id="dataTable" data-testid="data-table">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr><th>ID</th><th>Name</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Item One</td><td><span class="badge bg-success">Active</span></td></tr>
+                                <tr><td>2</td><td>Item Two</td><td><span class="badge bg-warning">Pending</span></td></tr>
+                                <tr><td>3</td><td>Item Three</td><td><span class="badge bg-danger">Inactive</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-2">
+                            <small class="text-muted">id="dataTable" for table screenshot</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms for Visual -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Registration Form</div>
+                    <div class="card-body" id="regForm" data-testid="reg-form">
+                        <form id="visualRegForm" data-testid="visual-reg-form">
+                            <div class="mb-2">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Enter name" id="visual-fullname" data-testid="visual-fullname">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="Enter email" id="visual-email" data-testid="visual-email">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="Enter password" id="visual-password" data-testid="visual-password">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Country</label>
+                                <select class="form-select" id="visual-country" data-testid="visual-country">
+                                    <option>Select Country</option>
+                                    <option>USA</option>
+                                    <option>UK</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" id="visual-register-btn" data-testid="visual-register-btn">Register</button>
+                        </form>
+                        <div class="mt-2">
+                            <small class="text-muted">form#regForm for form screenshot</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Visual -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Modal Dialog</div>
+                    <div class="card-body">
+                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#sampleModal">Open Modal</button>
+                        <div class="modal fade" id="sampleModal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal Title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>This is a modal dialog for visual testing.</p>
+                                        <p>id="sampleModal"</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">div#sampleModal - modal dialog for screenshot</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Content -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Dynamic Content (for change detection)</div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded" id="dynamicText">
+                                    <strong>Text Content:</strong>
+                                    <span id="textValue">Static text</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary mt-2" onclick="changeText()">Change Text</button>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded" id="dynamicStyle">
+                                    <strong>Style Change:</strong>
+                                    <div id="styleBox" class="mt-2" style="width:50px;height:50px;background:blue;"></div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary mt-2" onclick="changeStyle()">Change Style</button>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded" id="dynamicElement">
+                                    <strong>Element Added:</strong>
+                                    <div id="elementContainer" class="mt-2"></div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary mt-2" onclick="addElement()">Add Element</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+
+        function changeText() {
+            document.getElementById('textValue').textContent = 'Changed: ' + new Date().toLocaleTimeString();
+        }
+
+        function changeStyle() {
+            const colors = ['blue', 'red', 'green', 'orange', 'purple'];
+            const box = document.getElementById('styleBox');
+            box.style.background = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function addElement() {
+            const container = document.getElementById('elementContainer');
+            const el = document.createElement('span');
+            el.className = 'badge bg-info';
+            el.textContent = 'New Item ' + (container.children.length + 1);
+            container.appendChild(el);
+        }
+    </script>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

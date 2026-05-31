@@ -1,10 +1,14 @@
 const express = require('express');
 const basicAuth = require('express-basic-auth');
+const path = require('path');
 
 const app = express();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Serve static files from the root directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // Basic authentication middleware
 app.use(basicAuth({

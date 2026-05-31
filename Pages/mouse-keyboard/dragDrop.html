@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop - Test Automation Practice</title>
+        <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+    <style>
+        .drag-drop-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        #dropZone {
+            border: 3px dashed #4AAE9B;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+            color: #4AAE9B;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #dropZone.dragover {
+            background: linear-gradient(135deg, #e0fce7 0%, #ddf9fd 100%);
+            border-color: #22c55e;
+            color: #22c55e;
+            transform: scale(1.02);
+        }
+
+        #dropZone.success {
+            background: linear-gradient(135deg, #dcfce7 0%, #c7f0d8 100%);
+            border-color: #22c55e;
+            color: #16a34a;
+        }
+
+        .drag-image {
+            max-width: 200px;
+            border-radius: 10px;
+            cursor: grab;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .drag-image:active {
+            cursor: grabbing;
+            opacity: 0.7;
+        }
+
+        .demo-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <a href="#dragdrop-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+    <main id="dragdrop-main" class="container" style="padding: 2rem 0;" role="main" tabindex="-1">
+        <!-- Drag and Drop Files Section -->
+        <section>
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 6a</span>
+                    Drag & Drop Zone
+                </h3>
+                <p class="text-muted">Drag and drop files into the drop zone below. The zone will highlight when you drag files over it, and show a success message when files are dropped.</p>
+                
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Try to drag files over the drop zone</li>
+                        <li>The zone will change color when you drag over it</li>
+                        <li>Drop files to complete the action</li>
+                        <li>A success message will confirm the drop</li>
+                    </ol>
+                </div>
+
+                <div class="drag-drop-container">
+                    <div id="dropZone" data-testid="drop-zone">
+                        📂 Drag & Drop Files Here
+                    </div>
+                </div>
+
+                <!-- Assertion Message -->
+                <div class="assertion-message success" id="drop-assertion" data-testid="drop-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="drop-text" data-testid="drop-text">Files dropped successfully!</span>
+                </div>
+
+                <!-- Demo Result -->
+                <div class="demo-result empty" id="drop-result" data-testid="drop-result">
+                    Drag files over the zone to see results...
+                </div>
+            </div>
+        </section>
+
+        <!-- Drag Image Section -->
+        <section style="margin-top: 3rem;">
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 6b</span>
+                    Drag Image Action
+                </h3>
+                <p class="text-muted">Drag the image below to practice drag operations. The image can be dragged around the page to simulate drag-and-drop interactions.</p>
+                
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Grab the image below</li>
+                        <li>Drag it across the page</li>
+                        <li>Release to drop it</li>
+                        <li>A success message will appear after dragging</li>
+                    </ol>
+                </div>
+
+                <div style="margin: 2rem 0; text-align: center;">
+                    <div class="demo-container">
+                        <p style="color: #64748b; margin-bottom: 1rem;">Drag this image:</p>
+                        <img src="../../Images/meme.jpg" alt="Drag Image" class="drag-image" id="dragImage" draggable="true" data-testid="drag-image">
+                    </div>
+                </div>
+
+                <!-- Assertion Message -->
+                <div class="assertion-message success" id="image-assertion" data-testid="image-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    Image dragged successfully!
+                </div>
+
+                <!-- Demo Result -->
+                <div class="demo-result empty" id="image-result" data-testid="image-result">
+                    Drag the image to see results...
+                </div>
+            </div>
+        </section>
+
+        <!-- Kanban Board Section -->
+        <section style="margin-top: 3rem;">
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 6c</span>
+                    Kanban Board
+                </h3>
+                <p class="text-muted">Drag task cards between columns (Todo → In Progress → Done). Practice drag and drop between containers.</p>
+
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Grab a task card from any column</li>
+                        <li>Drag it to a different column</li>
+                        <li>The card count will update automatically</li>
+                        <li>A success message confirms the move</li>
+                    </ol>
+                </div>
+
+                <style>
+                    .kanban-board { display: flex; gap: 1rem; margin-top: 1.5rem; }
+                    .kanban-column { flex: 1; min-height: 250px; background: #f1f5f9; border-radius: 12px; padding: 1rem; border: 2px dashed transparent; transition: var(--transition); }
+                    .kanban-column.drag-over { border-color: var(--primary); background: #eef2ff; }
+                    .kanban-column-header { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; }
+                    .kanban-column-header .count { background: var(--primary); color: #fff; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+                    .kanban-card { background: #fff; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; cursor: grab; box-shadow: var(--shadow-sm); border-left: 4px solid var(--primary); transition: var(--transition); user-select: none; }
+                    .kanban-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+                    .kanban-card.dragging { opacity: 0.5; }
+                    .kanban-todo .kanban-card { border-left-color: var(--warning); }
+                    .kanban-progress .kanban-card { border-left-color: var(--info); }
+                    .kanban-done .kanban-card { border-left-color: var(--success); }
+                    @media (max-width: 768px) { .kanban-board { flex-direction: column; } }
+                </style>
+
+                <div class="kanban-board" id="kanban-board">
+                    <div class="kanban-column kanban-todo" id="kanban-todo" data-testid="kanban-todo">
+                        <div class="kanban-column-header" style="color: var(--warning);">
+                            📋 To Do <span class="count" id="todo-count" style="background: var(--warning);">3</span>
+                        </div>
+                        <div class="kanban-card" id="kanban-card-1" draggable="true" data-testid="kanban-card-1">📋 Write test cases</div>
+                        <div class="kanban-card" id="kanban-card-2" draggable="true" data-testid="kanban-card-2">🛠️ Set up environment</div>
+                        <div class="kanban-card" id="kanban-card-3" draggable="true" data-testid="kanban-card-3">📄 Review requirements</div>
+                    </div>
+                    <div class="kanban-column kanban-progress" id="kanban-inprogress" data-testid="kanban-inprogress">
+                        <div class="kanban-column-header" style="color: var(--info);">
+                            ⚙️ In Progress <span class="count" id="progress-count" style="background: var(--info);">1</span>
+                        </div>
+                        <div class="kanban-card" id="kanban-card-4" draggable="true" data-testid="kanban-card-4">⚙️ Automate login tests</div>
+                    </div>
+                    <div class="kanban-column kanban-done" id="kanban-done" data-testid="kanban-done">
+                        <div class="kanban-column-header" style="color: var(--success);">
+                            ✅ Done <span class="count" id="done-count" style="background: var(--success);">1</span>
+                        </div>
+                        <div class="kanban-card" id="kanban-card-5" draggable="true" data-testid="kanban-card-5">✅ Install Selenium</div>
+                    </div>
+                </div>
+
+                <div class="assertion-message success" id="kanban-assertion" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="kanban-text">Card moved successfully!</span>
+                </div>
+                <div class="demo-result empty" id="kanban-result">
+                    Drag cards between columns to see results...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../JavaScript/dragDrop.js"></script>
+    <script src="../../CURRICULUM.md"></script>
+    <script>
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = '../../index.html';
+            }
+        }
+
+        $(document).ready(function() {
+            var dropZone = $('#dropZone');
+
+            // Drag over event
+            dropZone.on('dragover', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).addClass('dragover');
+            });
+
+            // Drag leave event
+            dropZone.on('dragleave', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('dragover');
+            });
+
+            // Drop event
+            dropZone.on('drop', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('dragover').addClass('success');
+                $('#drop-assertion').show();
+                $('#drop-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ Files Dropped Successfully!</strong>');
+            });
+
+            // Image drag start
+            $('#dragImage').on('dragstart', function(e) {
+                e.dataTransfer = e.originalEvent.dataTransfer;
+            });
+
+            // Image drag end - show success
+            $('#dragImage').on('dragend', function(e) {
+                setTimeout(function() {
+                    $('#image-assertion').show();
+                    $('#image-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ Image Dragged Successfully!</strong>');
+                }, 100);
+            });
+        });
+
+        // Kanban Board
+        let draggedCard = null;
+        document.querySelectorAll('.kanban-card').forEach(function(card) {
+            card.addEventListener('dragstart', function(e) {
+                draggedCard = this;
+                this.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+            });
+            card.addEventListener('dragend', function() {
+                this.classList.remove('dragging');
+                draggedCard = null;
+                document.querySelectorAll('.kanban-column').forEach(function(c) { c.classList.remove('drag-over'); });
+            });
+        });
+        document.querySelectorAll('.kanban-column').forEach(function(col) {
+            col.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                if (draggedCard) this.classList.add('drag-over');
+            });
+            col.addEventListener('dragleave', function() { this.classList.remove('drag-over'); });
+            col.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                if (draggedCard && draggedCard.parentElement !== this) {
+                    this.appendChild(draggedCard);
+                    updateKanbanCounts();
+                    var colName = this.querySelector('.kanban-column-header').textContent.trim().split(' ')[1] || this.id;
+                    $('#kanban-assertion').show();
+                    $('#kanban-text').text('Card "' + draggedCard.textContent.trim() + '" moved to ' + colName);
+                    $('#kanban-result').removeClass('empty').html('<strong style="color: #22c55e;">✓ Card moved successfully!</strong>');
+                }
+            });
+        });
+        function updateKanbanCounts() {
+            document.getElementById('todo-count').textContent = document.querySelectorAll('#kanban-todo .kanban-card').length;
+            document.getElementById('progress-count').textContent = document.querySelectorAll('#kanban-inprogress .kanban-card').length;
+            document.getElementById('done-count').textContent = document.querySelectorAll('#kanban-done .kanban-card').length;
+        }
+    </script>
+
+        <footer class="site-footer" role="contentinfo">
+                <p>&copy; 2024 AA Practice Test Automation – Built for Test Automation Students</p>
+        </footer>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

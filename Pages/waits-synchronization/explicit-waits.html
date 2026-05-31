@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explicit Waits Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+    <style>
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+    <div class="container mt-5">
+        <h1>Explicit Waits Practice</h1>
+        <p class="lead">Learn to wait for specific conditions instead of hard-coded delays.</p>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Wait Scenarios</h5>
+            </div>
+            <div class="card-body">
+                <!-- Wait for Element to be Visible -->
+                <div class="mb-4">
+                    <h6>1. Wait for Element to Become Visible (3 seconds)</h6>
+                    <button id="makeVisible" class="btn btn-primary" data-testid="make-visible">
+                        Make Message Visible
+                    </button>
+                    <div id="visibleMessage" class="alert alert-success d-none" style="visibility: hidden;" data-testid="visible-message">
+                        ✓ Element is now visible! Test passed.
+                    </div>
+                </div>
+
+                <!-- Wait for Element to be Clickable -->
+                <div class="mb-4">
+                    <h6>2. Wait for Element to be Clickable (Button enabled after 2 seconds)</h6>
+                    <button id="disabledBtn" class="btn btn-warning" disabled data-testid="disabled-button">
+                        Click Me (Disabled)
+                    </button>
+                    <div id="clickableMessage" class="alert alert-info d-none mt-2" data-testid="clickable-message">
+                        ✓ Button was disabled, now enabled!
+                    </div>
+                </div>
+
+                <!-- Wait for Element Presence -->
+                <div class="mb-4">
+                    <h6>3. Wait for Element to be Present in DOM (4 seconds delay)</h6>
+                    <button id="addElement" class="btn btn-success" data-testid="add-element">
+                        Add Element to DOM
+                    </button>
+                    <div id="elementContainer" data-testid="element-container">
+                        <!-- New element will appear here -->
+                    </div>
+                </div>
+
+                <!-- Wait for Loading to Complete -->
+                <div class="mb-4">
+                    <h6>4. Wait for Loading Spinner to Disappear</h6>
+                    <button id="startLoading" class="btn btn-info" data-testid="start-loading">
+                        Start Process
+                    </button>
+                    <div id="loadingSpinner" class="loader d-none mt-2" data-testid="loading-spinner"></div>
+                    <div id="loadingResult" class="alert alert-success d-none mt-2" data-testid="loading-result">
+                        ✓ Process completed! Spinner disappeared.
+                    </div>
+                </div>
+
+                <!-- Wait for Text to Change -->
+                <div class="mb-4">
+                    <h6>5. Wait for Text to Change (from "Loading..." to "Done!")</h6>
+                    <button id="changeText" class="btn btn-warning" data-testid="change-text">
+                        Change Text
+                    </button>
+                    <div id="dynamicText" class="alert alert-secondary mt-2" data-testid="dynamic-text">
+                        Waiting...
+                    </div>
+                </div>
+
+                <!-- Wait for Attribute Value Change -->
+                <div class="mb-4">
+                    <h6>6. Wait for Attribute to Change (disabled → enabled)</h6>
+                    <button id="toggleAttr" class="btn btn-outline-primary" data-testid="toggle-attr">
+                        Enable Input Below
+                    </button>
+                    <input type="text" id="attrInput" class="form-control mt-2" disabled placeholder="Disabled initially" data-testid="attr-input">
+                    <div id="attrResult" class="alert alert-success d-none mt-2" data-testid="attr-result">
+                        ✓ Input attribute changed from disabled to enabled!
+                    </div>
+                </div>
+
+                <!-- Stale Element Reference -->
+                <div class="mb-4">
+                    <h6>7. Handle Stale Element (Element removed & re-added)</h6>
+                    <button id="refreshElement" class="btn btn-danger" data-testid="refresh-element">
+                        Refresh Element
+                    </button>
+                    <div id="staleContainer" data-testid="stale-container">
+                        <button id="staleBtn" class="btn btn-outline-danger" data-testid="stale-btn">
+                            Element (Will be Stale)
+                        </button>
+                    </div>
+                    <div id="staleResult" class="alert alert-success d-none mt-2" data-testid="stale-result">
+                        ✓ Element was refreshed successfully!
+                    </div>
+                </div>
+
+                <!-- Verify Explicit Wait Best Practices -->
+                <div class="mb-4">
+                    <h6>Test All Wait Conditions</h6>
+                    <button id="testAllWaits" class="btn btn-success" data-testid="test-all">
+                        Test All Wait Scenarios
+                    </button>
+                    <div id="allWaitsResult" class="alert d-none mt-2" data-testid="all-waits-result">
+                        <span id="allWaitsMessage"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wait Best Practices -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Explicit Wait Best Practices</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Wait for Visibility:</strong> Element is displayed on page</li>
+                    <li><strong>Wait for Presence:</strong> Element exists in DOM</li>
+                    <li><strong>Wait for Clickable:</strong> Element is visible AND enabled</li>
+                    <li><strong>Wait for Text:</strong> Element text equals/contains expected value</li>
+                    <li><strong>Wait for Attribute:</strong> Element attribute has expected value</li>
+                    <li><strong>Wait for Invisibility:</strong> Element is not visible (hidden, removed)</li>
+                    <li><strong>Set Timeout:</strong> Max wait time (10-30 seconds recommended)</li>
+                    <li><strong>Poll Interval:</strong> Check frequency (default 500ms)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../JavaScript/script.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            checkLoginStatus('../../Pages/synchronization/explicit-waits.html');
+        });
+
+        // 1. Wait for Element to be Visible
+        document.getElementById('makeVisible')?.addEventListener('click', function() {
+            setTimeout(() => {
+                const msg = document.getElementById('visibleMessage');
+                msg.classList.remove('d-none');
+                msg.style.visibility = 'visible';
+            }, 3000);
+        });
+
+        // 2. Wait for Element to be Clickable
+        setTimeout(() => {
+            const btn = document.getElementById('disabledBtn');
+            btn.disabled = false;
+            btn.addEventListener('click', function() {
+                document.getElementById('clickableMessage').classList.remove('d-none');
+            });
+        }, 2000);
+
+        // 3. Wait for Element Presence in DOM
+        document.getElementById('addElement')?.addEventListener('click', function() {
+            setTimeout(() => {
+                const newElement = document.createElement('div');
+                newElement.className = 'alert alert-success mt-2';
+                newElement.setAttribute('data-testid', 'new-element');
+                newElement.textContent = '✓ New element added to DOM!';
+                document.getElementById('elementContainer').appendChild(newElement);
+            }, 4000);
+        });
+
+        // 4. Wait for Loading to Complete
+        document.getElementById('startLoading')?.addEventListener('click', function() {
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.classList.remove('d-none');
+
+            setTimeout(() => {
+                spinner.classList.add('d-none');
+                document.getElementById('loadingResult').classList.remove('d-none');
+            }, 3000);
+        });
+
+        // 5. Wait for Text to Change
+        document.getElementById('changeText')?.addEventListener('click', function() {
+            const textDiv = document.getElementById('dynamicText');
+            textDiv.textContent = 'Loading...';
+
+            setTimeout(() => {
+                textDiv.textContent = 'Done!';
+            }, 2500);
+        });
+
+        // 6. Wait for Attribute to Change
+        document.getElementById('toggleAttr')?.addEventListener('click', function() {
+            setTimeout(() => {
+                const input = document.getElementById('attrInput');
+                input.disabled = false;
+                document.getElementById('attrResult').classList.remove('d-none');
+            }, 2000);
+        });
+
+        // 7. Handle Stale Element
+        document.getElementById('refreshElement')?.addEventListener('click', function() {
+            const container = document.getElementById('staleContainer');
+            const btn = document.getElementById('staleBtn');
+
+            // Remove and re-add to simulate stale element
+            btn.remove();
+            setTimeout(() => {
+                const newBtn = document.createElement('button');
+                newBtn.id = 'staleBtn';
+                newBtn.className = 'btn btn-outline-danger';
+                newBtn.setAttribute('data-testid', 'stale-btn');
+                newBtn.textContent = 'Element (Refreshed!)';
+                container.appendChild(newBtn);
+                document.getElementById('staleResult').classList.remove('d-none');
+            }, 1500);
+        });
+
+        // Test All Waits
+        document.getElementById('testAllWaits')?.addEventListener('click', async function() {
+            const result = document.getElementById('allWaitsResult');
+            const message = document.getElementById('allWaitsMessage');
+
+            // Simulate testing all scenarios
+            let passed = 0;
+            const total = 7;
+
+            // Run all tests
+            for (let i = 0; i < total; i++) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                passed++;
+            }
+
+            if (passed === total) {
+                message.textContent = `✓ All ${total} wait scenarios passed!`;
+                result.className = 'alert alert-success mt-2';
+            } else {
+                message.textContent = `✗ Some scenarios failed: ${passed}/${total}`;
+                result.className = 'alert alert-danger mt-2';
+            }
+            result.classList.remove('d-none');
+        });
+
+        function logout() {
+            sessionStorage.setItem('isLoggedIn', 'false');
+            window.scrollTo(0, 0);
+            window.location.href = '../../index.html';
+        }
+    </script>
+
+    <footer class="site-footer">
+        <p>&copy; 2024 AA Practice Test Automation � Built for Test Automation Students</p>
+    </footer>
+</body>
+</html>

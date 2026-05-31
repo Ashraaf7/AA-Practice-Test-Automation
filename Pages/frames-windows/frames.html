@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frames & iFrames Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+</head>
+
+<body>
+    <a href="#frames-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+    <main id="frames-main" class="container py-5" role="main" tabindex="-1">
+        <div class="text-center mb-4">
+            <h1>Frames & iFrames Practice</h1>
+            <p class="text-muted">Practice switching between frames and iframes</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Simple iFrame -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Simple iFrame</div>
+                    <div class="card-body">
+                        <p class="small text-muted">A simple iframe with form elements inside</p>
+                        <iframe id="simpleFrame" srcdoc='
+                            <!DOCTYPE html>
+                            <html>
+                            <head><style>body{font-family:sans-serif;padding:10px;}</style></head>
+                            <body>
+                                <h4>Frame Content</h4>
+                                <input type="text" id="frameInput" class="form-control mb-2" placeholder="Type in frame">
+                                <button id="frameBtn" class="btn btn-sm btn-primary">Frame Button</button>
+                                <p class="mt-2 mb-0" id="frameText">Frame text content</p>
+</body>
+                            </html>
+                        ' style="width:100%;height:200px;border:1px solid #ddd;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nested iFrames -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Nested iFrames</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Frame containing another frame</p>
+                        <iframe id="outerFrame" srcdoc='
+                            <!DOCTYPE html>
+                            <html>
+                            <head><style>body{font-family:sans-serif;padding:10px;}</style></head>
+                            <body>
+                                <h5>Outer Frame</h5>
+                                <input type="text" id="outerInput" class="form-control mb-2" placeholder="Outer input">
+                                <iframe id="innerFrame" srcdoc="
+                                    <!DOCTYPE html>
+                                    <html><head><style>body{font-family:sans-serif;padding:10px;background:#f0f0f0;}</style></head>
+                                    <body><h6>Inner Frame</h6><input type='text' id='innerInput' class='form-control mb-2' placeholder='Inner input'><button id='innerBtn' class='btn btn-sm btn-success'>Inner Button</button>
+</body></html>
+                                " style="width:100%;height:120px;border:1px solid #ccc;"></iframe>
+</body>
+                            </html>
+                        ' style="width:100%;height:250px;border:1px solid #ddd;"></iframe>
+                        <div class="mt-2">
+                            <small class="text-muted">Outer: id="outerFrame", "outerInput" | Inner: id="innerFrame", "innerInput", "innerBtn"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frame by Name/ID -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Frame with Name Attribute</div>
+                    <div class="card-body">
+                        <p class="small text-muted">iFrame with name attribute for switching</p>
+                        <iframe id="namedFrame" name="myNamedFrame" srcdoc='
+                            <!DOCTYPE html>
+                            <html>
+                            <head><style>body{font-family:sans-serif;padding:10px;}</style></head>
+                            <body>
+                                <h4>Named Frame</h4>
+                                <input type="text" id="namedInput" class="form-control mb-2" placeholder="Named frame input">
+                                <select id="namedSelect" class="form-select mb-2">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                                <button id="namedBtn" class="btn btn-sm btn-info">Named Button</button>
+</body>
+                            </html>
+                        ' style="width:100%;height:200px;border:1px solid #ddd;"></iframe>
+                        <div class="mt-2">
+                            <small class="text-muted">iframe id="namedFrame" name="myNamedFrame"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiple Frames Side by Side -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Multiple Frames</div>
+                    <div class="card-body">
+                        <p class="small text-muted">Side-by-side frames in a table</p>
+                        <table style="width:100%;border:1px solid #ddd;">
+                            <tr>
+                                <td style="width:50%;vertical-align:top;">
+                                    <iframe id="frame1" srcdoc='
+                                        <!DOCTYPE html>
+                                        <html><head><style>body{font-family:sans-serif;padding:5px;}</style></head>
+                                        <body><h6>Frame 1</h6><input type="text" id="f1Input" class="form-control" placeholder="Frame 1">
+</body></html>
+                                    ' style="width:100%;height:150px;border:1px solid #ccc;"></iframe>
+                                </td>
+                                <td style="width:50%;vertical-align:top;">
+                                    <iframe id="frame2" srcdoc='
+                                        <!DOCTYPE html>
+                                        <html><head><style>body{font-family:sans-serif;padding:5px;}</style></head>
+                                        <body><h6>Frame 2</h6><input type="text" id="f2Input" class="form-control" placeholder="Frame 2">
+</body></html>
+                                    ' style="width:100%;height:150px;border:1px solid #ccc;"></iframe>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="mt-2">
+                            <small class="text-muted">id="frame1", id="frame2" with nested inputs</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frame with Dynamic Content -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Frame with Checkboxes and Radio Buttons</div>
+                    <div class="card-body">
+                        <iframe id="checkboxFrame" srcdoc='
+                            <!DOCTYPE html>
+                            <html>
+                            <head><style>body{font-family:sans-serif;padding:15px;}</style></head>
+                            <body>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6>Checkboxes</h6>
+                                        <div class="form-check">
+                                            <input type="checkbox" id="check1" class="form-check-input" checked>
+                                            <label class="form-check-label" for="check1">Checkbox 1</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" id="check2" class="form-check-input">
+                                            <label class="form-check-label" for="check2">Checkbox 2</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" id="check3" class="form-check-input">
+                                            <label class="form-check-label" for="check3">Checkbox 3</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6>Radio Buttons</h6>
+                                        <div class="form-check">
+                                            <input type="radio" name="radioGroup" id="radio1" class="form-check-input" checked>
+                                            <label class="form-check-label" for="radio1">Radio 1</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="radioGroup" id="radio2" class="form-check-input">
+                                            <label class="form-check-label" for="radio2">Radio 2</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="radioGroup" id="radio3" class="form-check-input">
+                                            <label class="form-check-label" for="radio3">Radio 3</label>
+                                        </div>
+                                    </div>
+                                </div>
+</body>
+                            </html>
+                        ' style="width:100%;height:200px;border:1px solid #ddd;"></iframe>
+                        <div class="mt-2">
+                            <small class="text-muted">id="checkboxFrame" with checkboxes (check1, check2, check3) and radios (radio1, radio2, radio3)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function logout() {
+                // Use doLogout from auth.js for logout
+                if (typeof doLogout === 'function') {
+                    doLogout();
+                } else {
+                    window.location.href = '../index.html';
+                }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+</body>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

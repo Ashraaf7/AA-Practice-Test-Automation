@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider - Automation Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+    <style>
+        .slider-value { font-size: 1.25rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <a href="#slider-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+    <main id="slider-main" class="container py-4" role="main" tabindex="-1">
+        <div class="page-header">
+            <h1 class="page-title">Slider Practice</h1>
+            <p class="page-subtitle">Practice interacting with range sliders</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Basic Range -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Basic Range Slider</div>
+                    <div class="card-body">
+                        <label for="basicSlider" class="form-label">Volume: <span id="basicValue" class="slider-value text-primary">50</span></label>
+                        <input type="range" id="basicSlider" class="form-range" min="0" max="100" value="50" data-testid="basic-slider">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Price Range</div>
+                    <div class="card-body">
+                        <label class="form-label">Price: $<span id="minPrice">100</span> - $<span id="maxPrice">500</span></label>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="range" id="minSlider" class="form-range" min="0" max="1000" value="100" style="flex:1;" data-testid="min-slider">
+                            <span>-</span>
+                            <input type="range" id="maxSlider" class="form-range" min="0" max="1000" value="500" style="flex:1;" data-testid="max-slider">
+                        </div>
+                        <div class="mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Slider with Steps</div>
+                    <div class="card-body">
+                        <label for="stepSlider" class="form-label">Quantity: <span id="stepValue" class="slider-value text-primary">5</span></label>
+                        <input type="range" id="stepSlider" class="form-range" min="1" max="20" value="5" step="1" data-testid="step-slider">
+                    </div>
+                </div>
+            </div>
+
+            <!-- With Output -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Slider with Output</div>
+                    <div class="card-body">
+                        <label for="outputSlider" class="form-label">Brightness</label>
+                        <output for="outputSlider" id="outputValue" class="d-block mb-2" style="font-size:1.5rem;" data-testid="output-value">50%</output>
+                        <input type="range" id="outputSlider" class="form-range" min="0" max="100" value="50" data-testid="output-slider">
+                        <div class="progress mt-2" style="height:20px;">
+                            <div id="progressBar" class="progress-bar bg-warning" style="width:50%;" data-testid="progress-bar">50%</div>
+                        </div>
+                        <div class="mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Slider in Form</div>
+                    <div class="card-body">
+                        <form id="sliderForm" data-testid="slider-form">
+                            <div class="mb-3">
+                                <label for="ageSlider" class="form-label">Age: <span id="ageValue">25</span></label>
+                                <input type="range" id="ageSlider" class="form-range" min="18" max="65" value="25" data-testid="age-slider">
+                            </div>
+                            <div class="mb-3">
+                                <label for="ratingSlider" class="form-label">Rating: <span id="ratingValue">3</span>/5</label>
+                                <input type="range" id="ratingSlider" class="form-range" min="1" max="5" value="3" step="1" data-testid="rating-slider">
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-testid="slider-submit-btn">Submit</button>
+                        </form>
+                        <div id="formResult" class="alert alert-info mt-2 d-none" data-testid="slider-form-result"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Color RGB Sliders</div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <label for="redSlider" class="form-label">Red: <span id="redValue">128</span></label>
+                                <input type="range" id="redSlider" class="form-range" min="0" max="255" value="128" data-testid="red-slider">
+                            </div>
+                            <div class="col-4">
+                                <label for="greenSlider" class="form-label">Green: <span id="greenValue">128</span></label>
+                                <input type="range" id="greenSlider" class="form-range" min="0" max="255" value="128" data-testid="green-slider">
+                            </div>
+                            <div class="col-4">
+                                <label for="blueSlider" class="form-label">Blue: <span id="blueValue">128</span></label>
+                                <input type="range" id="blueSlider" class="form-range" min="0" max="255" value="128">
+                            </div>
+                        </div>
+                        <div id="colorPreview" class="mt-3 p-4 text-center text-white rounded" style="background:rgb(128,128,128);">Color Preview</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assertions -->
+        <div class="assertion-section">
+            <h6>Assertion Points</h6>
+            <div class="assertion-item">
+                <span>Get value</span>
+                <code>basicSlider.value</code>
+            </div>
+            <div class="assertion-item">
+                <span>Get min/max</span>
+                <code>basicSlider.min, basicSlider.max</code>
+            </div>
+            <div class="assertion-item">
+                <span>Check disabled</span>
+                <code>basicSlider.disabled === false</code>
+            </div>
+            <div class="assertion-item">
+                <span>Verify value in range</span>
+                <code>value >= min && value <= max</code>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('basicSlider').addEventListener('input', function() {
+            document.getElementById('basicValue').textContent = this.value;
+        });
+        document.getElementById('minSlider').addEventListener('input', function() {
+            if (parseInt(this.value) > parseInt(document.getElementById('maxSlider').value)) this.value = document.getElementById('maxSlider').value;
+            document.getElementById('minPrice').textContent = this.value;
+        });
+        document.getElementById('maxSlider').addEventListener('input', function() {
+            if (parseInt(this.value) < parseInt(document.getElementById('minSlider').value)) this.value = document.getElementById('minSlider').value;
+            document.getElementById('maxPrice').textContent = this.value;
+        });
+        document.getElementById('stepSlider').addEventListener('input', function() {
+            document.getElementById('stepValue').textContent = this.value;
+        });
+        document.getElementById('outputSlider').addEventListener('input', function() {
+            document.getElementById('outputValue').textContent = this.value + '%';
+            document.getElementById('progressBar').style.width = this.value + '%';
+            document.getElementById('progressBar').textContent = this.value + '%';
+        });
+        document.getElementById('ageSlider').addEventListener('input', function() {
+            document.getElementById('ageValue').textContent = this.value;
+        });
+        document.getElementById('ratingSlider').addEventListener('input', function() {
+            document.getElementById('ratingValue').textContent = this.value;
+        });
+        document.getElementById('sliderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const result = document.getElementById('formResult');
+            result.textContent = 'Age: ' + document.getElementById('ageSlider').value + ', Rating: ' + document.getElementById('ratingSlider').value;
+            result.classList.remove('d-none');
+        });
+        function updateColor() {
+            const r = document.getElementById('redSlider').value;
+            const g = document.getElementById('greenSlider').value;
+            const b = document.getElementById('blueSlider').value;
+            document.getElementById('redValue').textContent = r;
+            document.getElementById('greenValue').textContent = g;
+            document.getElementById('blueValue').textContent = b;
+            document.getElementById('colorPreview').style.background = 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+        document.getElementById('redSlider').addEventListener('input', updateColor);
+        document.getElementById('greenSlider').addEventListener('input', updateColor);
+        document.getElementById('blueSlider').addEventListener('input', updateColor);
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.classList.add('loaded');
+            document.body.classList.add('loaded');
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+</body>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

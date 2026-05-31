@@ -25,9 +25,23 @@ function onDrop(event) {
 
 function handleImageNameDrop(imageName) {
     // Add your code here to handle the drop event for the image name
-    console.log('Image '+ imageName + ' dropped');
-    // Example: Display a message when the image name is dropped
-    alert('Image '+ imageName + ' dropped');
+    console.log('Image ' + imageName + ' dropped');
+    showDropAlert('Image ' + imageName + ' dropped!', 'success');
+}
+
+// Show Bootstrap alert dynamically for drag/drop feedback
+function showDropAlert(message, type) {
+    let alertBox = document.getElementById('dropAlert');
+    if (!alertBox) {
+        alertBox = document.createElement('div');
+        alertBox.id = 'dropAlert';
+        alertBox.className = 'alert alert-' + type + ' mt-3';
+        alertBox.setAttribute('role', 'alert');
+        document.body.prepend(alertBox);
+    }
+    alertBox.textContent = message;
+    alertBox.style.display = 'block';
+    setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
 }
 
 // Define the onDragOver function

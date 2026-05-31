@@ -3,53 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Test Automation Practice
-    </title>
+    <title>Test Automation Practice</title>
     <link rel="icon" href="Images/test-automation-practice-logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous">
     <link rel="stylesheet" href="Styles/styles.css">
+    <script src="components/include.js"></script>
+                <style>
+                    body {
+                        min-height: 100vh;
+                        margin: 0;
+                        font-family: 'Segoe UI', system-ui, sans-serif;
+                        background: linear-gradient(120deg, var(--primary) 0%, var(--primary-dark) 100%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .login-hero {
+                        width: 100vw;
+                        min-height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        background: none;
+                        padding: 0;
+                    }
+                    .login-card {
+                        width: 100%;
+                        max-width: 370px;
+                        background: var(--card-bg);
+                        border-radius: 18px;
+                        box-shadow: 0 8px 40px var(--shadow-lg), 0 2px 8px var(--shadow-sm);
+                        padding: 38px 28px 28px 28px;
+                        margin: 0 auto;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) 0.1s both;
+                    }
+                    @keyframes fadeInUp {
+                        from { opacity: 0; transform: translateY(40px); }
+                        to { opacity: 1; transform: none; }
+                    }
+                    .login-title {
+                        font-size: 2.1rem;
+                        font-weight: 800;
+                        color: var(--primary-dark);
+                        text-align: center;
+                        margin-bottom: 8px;
+                        letter-spacing: -0.5px;
+                    }
+                    .login-desc {
+                        color: var(--text-secondary);
+                        text-align: center;
+                        font-size: 1.08rem;
+                        margin-bottom: 22px;
+                        font-weight: 400;
+                    }
+                    .form-label {
+                        font-weight: 600;
+                        color: var(--text-primary);
+                        margin-bottom: 7px;
+                        font-size: 1rem;
+                    }
+                    .form-control {
+                        padding: 13px 15px;
+                        border: 2px solid var(--border-color);
+                        border-radius: 10px;
+                        font-size: 16px;
+                        transition: border-color 0.2s, box-shadow 0.2s;
+                        background: var(--light-bg);
+                        color: var(--text-primary);
+                    }
+                    .form-control:focus {
+                        border-color: var(--primary);
+                        box-shadow: 0 0 0 2px rgba(99,102,241,0.10);
+                        background: #fff;
+                    }
+                    .form-control.is-invalid {
+                        border-color: var(--danger);
+                        background: #fff0f0;
+                    }
+                    .invalid-feedback {
+                        color: var(--danger);
+                        font-size: 0.97rem;
+                        margin-top: 2px;
+                        margin-bottom: 0;
+                        display: none;
+                    }
+                    .btn-login {
+                        background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+                        border: none;
+                        padding: 13px;
+                        border-radius: 10px;
+                        font-weight: 700;
+                        font-size: 17px;
+                        color: white;
+                        width: 100%;
+                        cursor: pointer;
+                        margin-top: 10px;
+                        transition: background 0.2s, box-shadow 0.2s;
+                        box-shadow: 0 2px 12px var(--shadow-md);
+                    }
+                    .btn-login:hover {
+                        background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 100%);
+                    }
+                    .alert-danger#loginError {
+                        font-size: 15px;
+                        padding: 8px 12px;
+                        margin-bottom: 12px;
+                        border-radius: 8px;
+                        border: none;
+                        background: linear-gradient(90deg, var(--danger) 0%, #ffb6b6 100%);
+                        color: #fff;
+                        box-shadow: 0 2px 8px rgba(255,107,107,0.08);
+                    }
+                    .form-check-input:checked {
+                        background-color: var(--primary);
+                        border-color: var(--primary);
+                    }
+                    .form-check-label {
+                        color: var(--text-secondary);
+                        font-size: 0.98rem;
+                        font-weight: 500;
+                        margin-left: 4px;
+                    }
+                    @media (max-width: 600px) {
+                        .login-card { max-width: 98vw; border-radius: 12px; padding: 18px 7vw 14px 7vw; }
+                    }
+                </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="google">
-                <div class="logo">
-                <img src="Images/test-automation-practice-logo.png" alt="Logo">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#">Home</a> </li>
-                <li><a href="Pages/about.html">About</a></li>
-            </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="login-container">
-        <form id="loginForm">
-            <h2 class="h3 mb-3 font-weight-normal">Login</h2>
-            <label for="inputUsername" class="sr-only">Username</label>
-            <input type="text" id="inputUsername" name="user" class="form-control" placeholder="Enter your username" required autofocus>
-            
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" id="loginButton" type="submit">Sign in</button>
-        </form>
-       
+    <!-- Global Loading Spinner Overlay -->
+    <div class="loading-overlay" id="globalLoading" style="display:none;">
+        <div class="spinner" aria-label="Loading"></div>
     </div>
-    <!-- Login credentials text outside the login container -->
-    <div class="login-credentials">
 
-        <h3>Login Credentials</h3>
-        <h4>Username: <span style="color: red;">admin</span></h4>
-        <h4>Password: <span style="color: red;">admin</span></h4>
-    </div>
-    <script src="JavaScript/login.js"></script>
+    <!-- No header on login page -->
+        <div class="login-hero">
+            <div class="login-card">
+                <div class="login-title">Sign in to Practice</div>
+                <div class="login-desc">Welcome! Please enter your credentials to continue.</div>
+                <form id="loginForm" novalidate autocomplete="off" style="width:100%;">
+                    <div class="mb-3">
+                        <label for="inputUsername" class="form-label">Username</label>
+                        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus autocomplete="username">
+                        <div class="invalid-feedback" id="usernameError">Username is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autocomplete="current-password">
+                        <div class="invalid-feedback" id="passwordError">Password is required.</div>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" value="remember-me" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <div class="alert alert-danger d-none" id="loginError" role="alert">Invalid credentials. Use <b>admin/admin</b></div>
+                    <button class="btn-login text-white" type="submit">Sign In</button>
+                    <div class="text-center mt-3" style="color:#64748b; font-size:0.98rem;">
+                        <span style="background:#f1f5f9; border-radius:6px; padding:3px 10px; display:inline-block;">Demo: <b>admin</b> / <b>admin</b></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    <script src="JavaScript/auth.js"></script>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('inputUsername');
+        const passwordInput = document.getElementById('inputPassword');
+        const usernameError = document.getElementById('usernameError');
+        const passwordError = document.getElementById('passwordError');
+        const loginError = document.getElementById('loginError');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            let valid = true;
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+            loginError.classList.add('d-none');
+            usernameInput.classList.remove('is-invalid');
+            passwordInput.classList.remove('is-invalid');
+
+            if (!usernameInput.value.trim()) {
+                usernameInput.classList.add('is-invalid');
+                usernameError.style.display = 'block';
+                valid = false;
+            }
+            if (!passwordInput.value.trim()) {
+                passwordInput.classList.add('is-invalid');
+                passwordError.style.display = 'block';
+                valid = false;
+            }
+            if (!valid) return;
+
+            if (usernameInput.value === 'admin' && passwordInput.value === 'admin') {
+                setAuthCookie('true');
+                window.location.href = 'Pages/main.html';
+            } else {
+                setAuthCookie('false');
+                loginError.classList.remove('d-none');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <footer class="site-footer"></footer>
 </body>
 </html>

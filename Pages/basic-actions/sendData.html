@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Input - Test Automation Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+</head>
+
+<body>
+    <a href="#senddata-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+    <script src="../../components/include.js"></script>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+    <main id="senddata-main" class="container" style="padding: 2rem 0;" role="main" tabindex="-1">
+        <div class="page-header">
+            <h1 class="page-title">Text Input</h1>
+            <p class="page-subtitle">Practice entering and validating text fields</p>
+        </div>
+        <section>
+            <div class="task-container">
+                <h3>
+                    <span class="task-badge">Task 3</span>
+                    Text Input
+                </h3>
+                <p class="text-muted">Enter text in the input fields below. The form will validate your input and display a success message when data is correctly entered.</p>
+                
+                <div class="steps-container">
+                    <h6>Steps to Complete:</h6>
+                    <ol>
+                        <li>Enter your first name in the first field</li>
+                        <li>Enter your last name in the second field</li>
+                        <li>Both fields are required to complete the task</li>
+                        <li>A success message will confirm both inputs are valid</li>
+                    </ol>
+                </div>
+
+                <div style="margin: 2rem 0; max-width: 400px;">
+                    <div class="form-group">
+                        <label for="first-name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first-name" placeholder="Enter your first name" data-testid="first-name-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last-name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last-name" placeholder="Enter your last name" data-testid="last-name-input">
+                    </div>
+
+                    <button class="action-btn primary" id="submit-text-btn" data-testid="submit-text-btn">Submit</button>
+                </div>
+
+                <!-- Assertion Message -->
+                <div class="assertion-message success" id="assertion-message" data-testid="assertion-message" style="display: none;">
+                    <strong>✓ Assertion Passed</strong><br>
+                    <span id="assertion-text">All text inputs are valid and submitted successfully!</span>
+                </div>
+
+                <!-- Demo Result -->
+                <div class="demo-result empty" id="demo-result">
+                    Fill in both fields and click submit to see the result...
+                </div>
+
+                <!-- Task Result Container -->
+                <div class="task-result" id="task-result" style="display: none;">
+                    <h5>Test Results</h5>
+                    <p><strong>Status:</strong> <span id="status-text" style="color: #22c55e; font-weight: 600;">✓ Passed</span></p>
+                    <p><strong>Action:</strong> <code>sendKeys()</code></p>
+                    <p><strong>Elements:</strong> <code>#first-name, #last-name</code></p>
+                    <p><strong>First Name:</strong> <code id="first-name-result"></code></p>
+                    <p><strong>Last Name:</strong> <code id="last-name-result"></code></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../JavaScript/script.js"></script>
+    <script>
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+
+        $(document).ready(function() {
+            $('#submit-text-btn').on('click', function() {
+                var firstName = $('#first-name').val().trim();
+                var lastName = $('#last-name').val().trim();
+                var assertionMsg = $('#assertion-message');
+                var demoResult = $('#demo-result');
+                var taskResult = $('#task-result');
+
+                if (firstName === '' || lastName === '') {
+                    assertionMsg.removeClass('success').addClass('error');
+                    $('#assertion-text').text('Please fill in both first name and last name fields!');
+                    assertionMsg.show();
+                    return;
+                }
+
+                // Show success
+                assertionMsg.removeClass('error').addClass('success');
+                $('#assertion-text').text('All text inputs are valid and submitted successfully!');
+                assertionMsg.show();
+
+                // Update demo result
+                demoResult.removeClass('empty').html('<strong style="color: #22c55e;">✓ Submitted: ' + firstName + ' ' + lastName + '</strong>');
+
+                // Update task result
+                $('#first-name-result').text(firstName);
+                $('#last-name-result').text(lastName);
+                taskResult.show();
+            });
+        });
+    </script>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+</body>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

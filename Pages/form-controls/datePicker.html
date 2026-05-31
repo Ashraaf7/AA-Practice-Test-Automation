@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Picker - Automation Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+</head>
+<body>
+    <a href="#datepicker-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+    <main id="datepicker-main" class="container py-4" role="main" tabindex="-1">
+        <div class="page-header">
+            <h1 class="page-title">Date Picker</h1>
+            <p class="page-subtitle">Practice calendar interactions</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Basic Date -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Basic Date Input</div>
+                    <div class="card-body">
+                        <label for="basicDate" class="form-label">Select Date</label>
+                        <input type="date" id="basicDate" class="form-control" value="2024-01-15" data-testid="basic-date-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Min/Max -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Date with Min/Max</div>
+                    <div class="card-body">
+                        <label for="minMaxDate" class="form-label">Select Date (Jan-Jun 2024)</label>
+                        <input type="date" id="minMaxDate" class="form-control" min="2024-01-01" max="2024-06-30" data-testid="minmax-date-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Calendar -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Custom Calendar</div>
+                    <div class="card-body">
+                        <button class="btn btn-outline-primary mb-3" onclick="toggleCalendar()" id="open-calendar-btn" data-testid="open-calendar-btn">Open Calendar</button>
+                        <div id="customCalendar" class="border rounded p-3" style="display:none;" data-testid="custom-calendar">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="changeMonth(-1)" id="calendar-prev-btn" data-testid="calendar-prev-btn">&lt;</button>
+                                <strong id="calendarMonth" data-testid="calendar-month">January 2024</strong>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="changeMonth(1)" id="calendar-next-btn" data-testid="calendar-next-btn">&gt;</button>
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="row text-center fw-bold small mb-2">
+                                    <div class="col">Su</div><div class="col">Mo</div><div class="col">Tu</div>
+                                    <div class="col">We</div><div class="col">Th</div><div class="col">Fr</div><div class="col">Sa</div>
+                                </div>
+                                <div id="calendarDays" class="row text-center"></div>
+                            </div>
+                        </div>
+                        <input type="text" id="selectedDate" class="form-control mt-2" placeholder="Selected date" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Range -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Date Range</div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label for="startDate" class="form-label">Start Date</label>
+                                <input type="date" id="startDate" class="form-control">
+                            </div>
+                            <div class="col-6">
+                                <label for="endDate" class="form-label">End Date</label>
+                                <input type="date" id="endDate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DateTime -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Date with Time</div>
+                    <div class="card-body">
+                        <label for="dateTime" class="form-label">Date and Time</label>
+                        <input type="datetime-local" id="dateTime" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Month Picker</div>
+                    <div class="card-body">
+                        <label for="monthPicker" class="form-label">Select Month</label>
+                        <input type="month" id="monthPicker" class="form-control" min="2024-01" max="2024-12">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Week Picker</div>
+                    <div class="card-body">
+                        <label for="weekPicker" class="form-label">Select Week</label>
+                        <input type="week" id="weekPicker" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Date Validation Form</div>
+                    <div class="card-body">
+                        <form id="dateForm" class="row g-3">
+                            <div class="col-md-4">
+                                <label for="birthDate" class="form-label">Birth Date</label>
+                                <input type="date" id="birthDate" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="bookingDate" class="form-label">Booking Date</label>
+                                <input type="date" id="bookingDate" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="expiryDate" class="form-label">Expiry Date</label>
+                                <input type="date" id="expiryDate" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Validate Dates</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assertion Points -->
+        <div class="assertion-section">
+            <h6>Assertion Points</h6>
+            <div class="assertion-item">
+                <span>Get value</span>
+                <code>document.getElementById('basicDate').value</code>
+            </div>
+            <div class="assertion-item">
+                <span>Get min/max</span>
+                <code>basicDate.min, basicDate.max</code>
+            </div>
+            <div class="assertion-item">
+                <span>Check enabled</span>
+                <code>basicDate.disabled === false</code>
+            </div>
+            <div class="assertion-item">
+                <span>Verify format</span>
+                <code>value matches YYYY-MM-DD</code>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentMonth = 0;
+        let currentYear = 2024;
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        function toggleCalendar() {
+            const cal = document.getElementById('customCalendar');
+            cal.style.display = cal.style.display === 'none' ? 'block' : 'none';
+            renderCalendar();
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            document.getElementById('calendarMonth').textContent = months[currentMonth] + ' ' + currentYear;
+            const container = document.getElementById('calendarDays');
+            container.innerHTML = '';
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                container.innerHTML += '<div class="col p-1"></div>';
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                container.innerHTML += '<div class="col p-1"><button class="btn btn-sm btn-outline-primary w-100" onclick="selectDate(' + day + ')">' + day + '</button></div>';
+            }
+        }
+
+        function selectDate(day) {
+            const date = currentYear + '-' + String(currentMonth + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+            document.getElementById('selectedDate').value = date;
+        }
+
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+</body>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+</body>
+</html>

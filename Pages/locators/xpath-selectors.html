@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPath Selectors Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+</head>
+
+<body>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+    <div class="container mt-5">
+        <h1>XPath Selectors Practice</h1>
+        <p class="lead">Master XPath - the most powerful locator strategy for complex element selection.</p>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>XPath Examples</h5>
+                <small class="text-muted">Practice different XPath strategies</small>
+            </div>
+            <div class="card-body">
+                <!-- Absolute XPath -->
+                <div class="mb-4">
+                    <h6>Absolute XPath: /html/body/..././button</h6>
+                    <button id="absoluteXpathBtn" class="btn btn-primary" data-testid="absolute-xpath">
+                        Absolute XPath Button
+                    </button>
+                </div>
+
+                <!-- Relative XPath -->
+                <div class="mb-4">
+                    <h6>Relative XPath: //button[@id='relativeXpathBtn']</h6>
+                    <button id="relativeXpathBtn" class="btn btn-secondary" data-testid="relative-xpath">
+                        Relative XPath Button
+                    </button>
+                </div>
+
+                <!-- Text-based XPath -->
+                <div class="mb-4">
+                    <h6>Text-based XPath: //button[text()='Find by Text']</h6>
+                    <button class="btn btn-info" data-testid="text-based">
+                        Find by Text
+                    </button>
+                </div>
+
+                <!-- Attribute-based XPath -->
+                <div class="mb-4">
+                    <h6>Attribute XPath: //input[@name='email']</h6>
+                    <input type="email" name="email" class="form-control" placeholder="Email" data-testid="email-input" required aria-required="true" aria-describedby="xpathEmail-error">
+                    <div class="invalid-feedback" id="xpathEmail-error">Email is required.</div>
+                </div>
+
+                <!-- Starts-with XPath -->
+                <div class="mb-4">
+                    <h6>Starts-with: //button[starts-with(@id, 'btn')]</h6>
+                    <button id="btn_submit" class="btn btn-success" data-testid="starts-with">
+                        Submit Button
+                    </button>
+                    <button id="btn_cancel" class="btn btn-danger ms-2" data-testid="cancel">
+                        Cancel Button
+                    </button>
+                </div>
+
+                <!-- Contains XPath -->
+                <div class="mb-4">
+                    <h6>Contains: //button[contains(@class, 'btn')]</h6>
+                    <button id="saveData" class="btn btn-outline-success" data-testid="save">
+                        Save Data
+                    </button>
+                    <button id="editData" class="btn btn-outline-warning ms-2" data-testid="edit">
+                        Edit Data
+                    </button>
+                </div>
+
+                <!-- AND/OR Conditions -->
+                <div class="mb-4">
+                    <h6>XPath with AND/OR: //button[@type='button' AND @class='btn btn-warning']</h6>
+                    <button type="button" class="btn btn-warning" data-testid="warning">
+                        Warning Action
+                    </button>
+                </div>
+
+                <!-- Parent Navigation -->
+                <div class="mb-4">
+                    <h6>Parent Navigation: //button[@id='childBtn']/parent::div</h6>
+                    <div id="parentDiv" class="border p-3 mb-2">
+                        <button id="childBtn" class="btn btn-dark" data-testid="child">
+                            Child Button
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Following/Preceding Axis -->
+                <div class="mb-4">
+                    <h6>Following Sibling: //label[text()='Name']/following-sibling::input</h6>
+                    <label>Name:</label>
+                    <input type="text" class="form-control" placeholder="Your name" data-testid="name">
+                </div>
+
+                <!-- Position-based XPath -->
+                <div class="mb-4">
+                    <h6>Position-based: //button[position()=1] or //button[1]</h6>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary" data-testid="first">First</button>
+                        <button type="button" class="btn btn-outline-primary" data-testid="second">Second</button>
+                        <button type="button" class="btn btn-outline-primary" data-testid="third">Third</button>
+                    </div>
+                </div>
+
+                <!-- Last Element -->
+                <div class="mb-4">
+                    <h6>Last Element: //button[last()]</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">First Item</li>
+                        <li class="list-group-item">Second Item</li>
+                        <li class="list-group-item">Last Item</li>
+                    </ul>
+                </div>
+
+                <button id="validateXpath" class="btn btn-primary" data-testid="validate">Validate XPaths</button>
+                <div id="result" class="alert alert-success d-none mt-3" data-testid="result">
+                    All XPath examples found successfully!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../JavaScript/script.js"></script>
+    <script>
+
+
+        document.getElementById('validateXpath')?.addEventListener('click', function() {
+            const allElementsFound = document.querySelectorAll('[data-testid]').length > 0;
+            if (allElementsFound) {
+                document.getElementById('result').classList.remove('d-none');
+            }
+        });
+
+
+    </script>
+
+    <footer class="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Testing Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+    <script src="../../JavaScript/auth.js"></script>
+    <style>
+        .api-card { border-left: 4px solid #0d6efd; }
+        .method-badge { min-width: 60px; }
+    </style>
+</head>
+
+<body>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+    <main class="container py-5">
+        <div class="text-center mb-4">
+            <h1>API Testing Practice</h1>
+            <p class="text-muted">Practice REST API testing with different methods and scenarios</p>
+        </div>
+
+        <!-- API Endpoints Reference -->
+        <div class="alert alert-info mb-4">
+            <h5>API Endpoints (JSONPlaceholder)</h5>
+            <div class="row g-2 small">
+                <div class="col-auto"><code>GET /posts</code></div>
+                <div class="col-auto"><code>GET /posts/1</code></div>
+                <div class="col-auto"><code>GET /posts/1/comments</code></div>
+                <div class="col-auto"><code>POST /posts</code></div>
+                <div class="col-auto"><code>PUT /posts/1</code></div>
+                <div class="col-auto"><code>DELETE /posts/1</code></div>
+                <div class="col-auto"><code>GET /comments?postId=1</code></div>
+                <div class="col-auto"><code>GET /users</code></div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- GET Request -->
+            <div class="col-md-6">
+                <div class="card h-100 api-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>GET Request</span>
+                        <span class="badge bg-success method-badge">GET</span>
+                    </div>
+                    <div class="card-body">
+                        <label for="getEndpoint" class="form-label">Endpoint <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="getEndpoint" class="form-control mb-2" value="/posts/1" required aria-required="true" aria-describedby="getEndpoint-error" data-testid="get-endpoint-input">
+                        <div class="invalid-feedback" id="getEndpoint-error">Endpoint is required.</div>
+                        <button class="btn btn-primary btn-sm" onclick="makeGetRequest()" aria-label="Send GET request" data-testid="send-get-btn">Send GET</button>
+                        <div class="mt-3">
+                            <label class="form-label">Response</label>
+                            <pre id="getResponse" class="bg-dark text-light p-3 rounded" style="font-size:12px;max-height:200px;overflow:auto;">Response will appear here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POST Request -->
+            <div class="col-md-6">
+                <div class="card h-100 api-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>POST Request</span>
+                        <span class="badge bg-warning method-badge">POST</span>
+                    </div>
+                    <div class="card-body">
+                        <label for="postEndpoint" class="form-label">Endpoint <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="postEndpoint" class="form-control mb-2" value="/posts" required aria-required="true" aria-describedby="postEndpoint-error" data-testid="post-endpoint-input">
+                        <div class="invalid-feedback" id="postEndpoint-error">Endpoint is required.</div>
+                        <label for="postBody" class="form-label">Request Body (JSON) <span class="text-danger" aria-hidden="true">*</span></label>
+                        <textarea id="postBody" class="form-control mb-2" rows="4" required aria-required="true" aria-describedby="postBody-error" data-testid="post-body-input">{
+  "title": "Test Title",
+  "body": "Test body content",
+  "userId": 1
+}</textarea>
+                        <div class="invalid-feedback" id="postBody-error">Request body is required.</div>
+                        <button class="btn btn-warning btn-sm" onclick="makePostRequest()" aria-label="Send POST request" data-testid="send-post-btn">Send POST</button>
+                        <div class="mt-3">
+                            <label class="form-label">Response</label>
+                            <pre id="postResponse" class="bg-dark text-light p-3 rounded" style="font-size:12px;max-height:200px;overflow:auto;">Response will appear here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Query Parameters -->
+            <div class="col-md-6">
+                <div class="card h-100 api-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Query Parameters</span>
+                        <span class="badge bg-success method-badge">GET</span>
+                    </div>
+                    <div class="card-body">
+                        <label for="queryEndpoint" class="form-label">Endpoint <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="queryEndpoint" class="form-control mb-2" value="/comments" required aria-required="true" aria-describedby="queryEndpoint-error" data-testid="query-endpoint-input">
+                        <div class="invalid-feedback" id="queryEndpoint-error">Endpoint is required.</div>
+                        <label for="queryParams" class="form-label">Query Parameters <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="queryParams" class="form-control mb-2" placeholder="postId=1&userId=1" value="postId=1" required aria-required="true" aria-describedby="queryParams-error" data-testid="query-params-input">
+                        <div class="invalid-feedback" id="queryParams-error">Query parameters are required.</div>
+                        <button class="btn btn-primary btn-sm" onclick="makeQueryRequest()" aria-label="Send GET with query params" data-testid="send-query-btn">Send GET with Params</button>
+                        <div class="mt-3">
+                            <label class="form-label">Response</label>
+                            <pre id="queryResponse" class="bg-dark text-light p-3 rounded" style="font-size:12px;max-height:200px;overflow:auto;">Response will appear here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Headers -->
+            <div class="col-md-6">
+                <div class="card h-100 api-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Custom Headers</span>
+                        <span class="badge bg-secondary method-badge">ANY</span>
+                    </div>
+                    <div class="card-body">
+                        <label for="headerEndpoint" class="form-label">Endpoint <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="headerEndpoint" class="form-control mb-2" value="/posts/1" required aria-required="true" aria-describedby="headerEndpoint-error" data-testid="header-endpoint-input">
+                        <div class="invalid-feedback" id="headerEndpoint-error">Endpoint is required.</div>
+                        <label for="customHeaders" class="form-label">Headers (JSON) <span class="text-danger" aria-hidden="true">*</span></label>
+                        <textarea id="customHeaders" class="form-control mb-2" rows="3" required aria-required="true" aria-describedby="customHeaders-error" data-testid="custom-headers-input">{
+                        <div class="invalid-feedback" id="customHeaders-error">Headers are required.</div>
+  "Content-Type": "application/json",
+  "Authorization": "Bearer test-token",
+  "X-Custom-Header": "custom-value"
+}</textarea>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm" onclick="makeRequestWithHeaders('GET')" aria-label="Send GET with headers" data-testid="send-header-get-btn">GET</button>
+                            <button class="btn btn-warning btn-sm" onclick="makeRequestWithHeaders('POST')" aria-label="Send POST with headers" data-testid="send-header-post-btn">POST</button>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Response</label>
+                            <pre id="headerResponse" class="bg-dark text-light p-3 rounded" style="font-size:12px;max-height:200px;overflow:auto;">Response will appear here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUT Request -->
+            <div class="col-md-6">
+                <div class="card h-100 api-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>PUT Request (Update)</span>
+                        <span class="badge bg-info method-badge">PUT</span>
+                    </div>
+                    <div class="card-body">
+                        <label for="putEndpoint" class="form-label">Endpoint <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="putEndpoint" class="form-control mb-2" value="/posts/1" required aria-required="true" aria-describedby="putEndpoint-error" data-testid="put-endpoint-input">
+                        <div class="invalid-feedback" id="putEndpoint-error">Endpoint is required.</div>
+                        <label for="putBody" class="form-label">Request Body (JSON) <span class="text-danger" aria-hidden="true">*</span></label>
+                        <textarea id="putBody" class="form-control mb-2" rows="4" required aria-required="true" aria-describedby="putBody-error" data-testid="put-body-input">{
+                        <div class="invalid-feedback" id="putBody-error">Request body is required.</div>
+  "id": 1,
+  "title": "Updated Title",
+  "body": "Updated body content",
+  "userId": 1
+}</textarea>
+                        <button class="btn btn-info btn-sm" onclick="makePutRequest()" aria-label="Send PUT request" data-testid="send-put-btn">Send PUT</button>
+                        <div class="mt-3">
+                            <label class="form-label">Response</label>
+                            <pre id="putResponse" class="bg-dark text-light p-3 rounded" style="font-size:12px;max-height:200px;overflow:auto;">Response will appear here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE Request -->
+            <div class="col-md-6">
+                <div class="card h-100 api-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>DELETE Request</span>
+                        <span class="badge bg-danger method-badge">DELETE</span>
+                    </div>
+                    <div class="card-body">
+                        <label for="deleteEndpoint" class="form-label">Endpoint <span class="text-danger" aria-hidden="true">*</span></label>
+                        <input type="text" id="deleteEndpoint" class="form-control mb-2" value="/posts/1" required aria-required="true" aria-describedby="deleteEndpoint-error" data-testid="delete-endpoint-input">
+                        <div class="invalid-feedback" id="deleteEndpoint-error">Endpoint is required.</div>
+                        <button class="btn btn-danger btn-sm" onclick="makeDeleteRequest()" aria-label="Send DELETE request" data-testid="send-delete-btn">Send DELETE</button>
+                        <div class="mt-3">
+                            <label class="form-label">Response</label>
+                            <pre id="deleteResponse" class="bg-dark text-light p-3 rounded" style="font-size:12px;max-height:200px;overflow:auto;">Response will appear here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Code Reference -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Status Code Reference</div>
+                    <div class="card-body">
+                        <div class="row g-2 small">
+                            <div class="col-auto"><span class="badge bg-success">200 OK</span> Success</div>
+                            <div class="col-auto"><span class="badge bg-success">201 Created</span> Resource created</div>
+                            <div class="col-auto"><span class="badge bg-warning">204 No Content</span> Success, no response body</div>
+                            <div class="col-auto"><span class="badge bg-danger">400 Bad Request</span> Invalid request</div>
+                            <div class="col-auto"><span class="badge bg-danger">401 Unauthorized</span> Authentication required</div>
+                            <div class="col-auto"><span class="badge bg-danger">403 Forbidden</span> Access denied</div>
+                            <div class="col-auto"><span class="badge bg-danger">404 Not Found</span> Resource doesn't exist</div>
+                            <div class="col-auto"><span class="badge bg-danger">500 Internal Server Error</span> Server error</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const BASE_URL = 'https://jsonplaceholder.typicode.com';
+
+        // Use doLogout from auth.js for logout
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.location.href = getRelativePath('index.html');
+            }
+        }
+
+        async function makeGetRequest() {
+            const endpoint = document.getElementById('getEndpoint').value;
+            try {
+                const res = await fetch(BASE_URL + endpoint);
+                const data = await res.json();
+                document.getElementById('getResponse').textContent = JSON.stringify({ status: res.status, data }, null, 2);
+            } catch (err) {
+                document.getElementById('getResponse').textContent = 'Error: ' + err.message;
+            }
+        }
+
+        async function makePostRequest() {
+            const endpoint = document.getElementById('postEndpoint').value;
+            const body = JSON.parse(document.getElementById('postBody').value);
+            try {
+                const res = await fetch(BASE_URL + endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await res.json();
+                document.getElementById('postResponse').textContent = JSON.stringify({ status: res.status, data }, null, 2);
+            } catch (err) {
+                document.getElementById('postResponse').textContent = 'Error: ' + err.message;
+            }
+        }
+
+        async function makeQueryRequest() {
+            const endpoint = document.getElementById('queryEndpoint').value;
+            const params = document.getElementById('queryParams').value;
+            try {
+                const res = await fetch(BASE_URL + endpoint + '?' + params);
+                const data = await res.json();
+                document.getElementById('queryResponse').textContent = JSON.stringify({ status: res.status, data }, null, 2);
+            } catch (err) {
+                document.getElementById('queryResponse').textContent = 'Error: ' + err.message;
+            }
+        }
+
+        async function makeRequestWithHeaders(method) {
+            const endpoint = document.getElementById('headerEndpoint').value;
+            const headers = JSON.parse(document.getElementById('customHeaders').value);
+            const options = { method, headers };
+            if (method === 'POST') {
+                options.body = JSON.stringify({ title: 'test', body: 'test', userId: 1 });
+            }
+            try {
+                const res = await fetch(BASE_URL + endpoint, options);
+                const data = await res.json();
+                document.getElementById('headerResponse').textContent = JSON.stringify({ status: res.status, data }, null, 2);
+            } catch (err) {
+                document.getElementById('headerResponse').textContent = 'Error: ' + err.message;
+            }
+        }
+
+        async function makePutRequest() {
+            const endpoint = document.getElementById('putEndpoint').value;
+            const body = JSON.parse(document.getElementById('putBody').value);
+            try {
+                const res = await fetch(BASE_URL + endpoint, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await res.json();
+                document.getElementById('putResponse').textContent = JSON.stringify({ status: res.status, data }, null, 2);
+            } catch (err) {
+                document.getElementById('putResponse').textContent = 'Error: ' + err.message;
+            }
+        }
+
+        async function makeDeleteRequest() {
+            const endpoint = document.getElementById('deleteEndpoint').value;
+            try {
+                const res = await fetch(BASE_URL + endpoint, { method: 'DELETE' });
+                const data = await res.text();
+                document.getElementById('deleteResponse').textContent = JSON.stringify({ status: res.status, data: data || '(empty)' }, null, 2);
+            } catch (err) {
+                document.getElementById('deleteResponse').textContent = 'Error: ' + err.message;
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="site-footer"></footer>
+</body>
+</html>

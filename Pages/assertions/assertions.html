@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assertions Practice</title>
+    <link rel="icon" href="../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../Styles/styles.css">
+</head>
+
+<body>
+    <script src="../components/include.js"></script>
+    <div class="site-header"></div>
+    <script src="../JavaScript/auth.js"></script>
+    <script src="../JavaScript/nav.js"></script>
+
+    <main class="container py-5">
+        <div class="text-center mb-4">
+            <h1>Assertions Practice</h1>
+            <p class="text-muted">Practice verifying element states, text, and attributes</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Text Assertions -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Text Content Assertions</div>
+                    <div class="card-body">
+                        <h5 id="mainHeading" class="card-title">Main Heading Text</h5>
+                        <p id="descriptionText" class="card-text">This is a description paragraph with some text.</p>
+                        <span id="hiddenText" class="text-muted" style="display:none;">Hidden text element</span>
+                        <div class="mt-2">
+                            <small class="text-muted">id="mainHeading", "descriptionText", "hiddenText"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Element Visibility -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Visibility Assertions</div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <button class="btn btn-primary" onclick="toggleVisibility()">Toggle Visibility</button>
+                        </div>
+                        <div id="visibleElement" class="p-2 bg-success text-white rounded">I am visible</div>
+                        <div id="hiddenElement" class="p-2 bg-danger text-white rounded" style="display:none;">I am hidden</div>
+                        <div id="displayNone" class="p-2 bg-warning text-white rounded" style="display:none;">display:none</div>
+                        <div id="visibilityHidden" class="p-2 bg-info text-white rounded" style="visibility:hidden;">visibility:hidden</div>
+                        <div class="mt-2">
+                            <small class="text-muted">id="visibleElement", "hiddenElement", "displayNone", "visibilityHidden"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enabled/Disabled -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Enabled/Disabled Assertions</div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <button class="btn btn-outline-secondary" onclick="toggleDisabled()">Toggle Disabled</button>
+                        </div>
+                        <input type="text" id="enabledInput" class="form-control mb-2" value="Enabled input" required aria-required="true" aria-describedby="enabledInput-error">
+                        <div class="invalid-feedback" id="enabledInput-error">This field is required.</div>
+                        <input type="text" id="disabledInput" class="form-control mb-2" value="Disabled input" disabled aria-describedby="disabledInput-error">
+                        <div class="invalid-feedback" id="disabledInput-error">This field is disabled.</div>
+                        <input type="text" id="readonlyInput" class="form-control" value="Readonly input" readonly aria-describedby="readonlyInput-error">
+                        <div class="invalid-feedback" id="readonlyInput-error">This field is readonly.</div>
+                        <div class="mt-2">
+                            <small class="text-muted">id="enabledInput", "disabledInput" (disabled), "readonlyInput" (readonly)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attribute Assertions -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Attribute Assertions</div>
+                    <div class="card-body">
+                        <input type="text" id="attrInput" class="form-control mb-2" placeholder="Type here" required>
+                        <a id="linkElement" href="https://example.com" class="btn btn-outline-primary mb-2">Link Button</a>
+                        <img id="imgElement" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Crect width='50' height='50' fill='%2320c997'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white'%3EImage%3C/text%3E%3C/svg%3E" alt="Test Image" class="d-block" style="width:50px;height:50px;">
+                        <div class="mt-2">
+                            <small class="text-muted">id="attrInput" (required), "linkElement" (href), "imgElement" (src, alt)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkbox State -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Checkbox Assertions</div>
+                    <div class="card-body">
+                        <div class="form-check mb-2">
+                            <input type="checkbox" id="checkedCb" class="form-check-input" checked>
+                            <label class="form-check-label" for="checkedCb">Checked Checkbox</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input type="checkbox" id="uncheckedCb" class="form-check-input">
+                            <label class="form-check-label" for="uncheckedCb">Unchecked Checkbox</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="disabledCb" class="form-check-input" disabled checked>
+                            <label class="form-check-label" for="disabledCb">Disabled Checkbox</label>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">id="checkedCb" (checked), "uncheckedCb", "disabledCb" (disabled)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Radio Button State -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Radio Button Assertions</div>
+                    <div class="card-body">
+                        <div class="form-check mb-2">
+                            <input type="radio" name="assertionRadio" id="radio1" class="form-check-input" checked>
+                            <label class="form-check-label" for="radio1">Radio 1 (Selected)</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input type="radio" name="assertionRadio" id="radio2" class="form-check-input">
+                            <label class="form-check-label" for="radio2">Radio 2</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="assertionRadio" id="radio3" class="form-check-input">
+                            <label class="form-check-label" for="radio3">Radio 3</label>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">name="assertionRadio", id="radio1" (selected), "radio2", "radio3"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Property Assertions -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">CSS Property Assertions</div>
+                    <div class="card-body">
+                        <div id="coloredText" class="text-danger fw-bold mb-2">Red Bold Text</div>
+                        <div id="bgElement" class="p-2 bg-primary text-white rounded mb-2">Background Color</div>
+                        <div id="styledElement" style="font-size:24px;color:green;">Large Green Text</div>
+                        <div class="mt-2">
+                            <small class="text-muted">id="coloredText" (color, font-weight), "bgElement" (background), "styledElement" (font-size)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Assertions -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">Dropdown Assertions</div>
+                    <div class="card-body">
+                        <label for="assertionSelect" class="form-label">Select Option</label>
+                        <select id="assertionSelect" class="form-select mb-2">
+                            <option value="">-- Select --</option>
+                            <option value="1">Option 1</option>
+                            <option value="2" selected>Option 2 (Selected)</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label for="multiSelect" class="form-label">Multi Select</label>
+                        <select id="multiSelect" class="form-select" multiple size="3">
+                            <option value="a" selected>Multi 1</option>
+                            <option value="b">Multi 2</option>
+                            <option value="c" selected>Multi 3</option>
+                        </select>
+                        <div class="mt-2">
+                            <small class="text-muted">id="assertionSelect" (selected value="2"), id="multiSelect"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Count Assertions -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Count Assertions</div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <h6>List Items</h6>
+                                <ul id="itemList">
+                                    <li>Item 1</li>
+                                    <li>Item 2</li>
+                                    <li>Item 3</li>
+                                </ul>
+                                <small class="text-muted">ul#itemList with 3 li elements</small>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Table Rows</h6>
+                                <table class="table table-sm" id="dataTable">
+                                    <thead><tr><th>Name</th><th>Value</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Row 1</td><td>100</td></tr>
+                                        <tr><td>Row 2</td><td>200</td></tr>
+                                        <tr><td>Row 3</td><td>300</td></tr>
+                                    </tbody>
+                                </table>
+                                <small class="text-muted">table#dataTable with 3 tbody tr</small>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Options</h6>
+                                <div id="optionContainer">
+                                    <span class="badge bg-primary">Option 1</span>
+                                    <span class="badge bg-success">Option 2</span>
+                                    <span class="badge bg-warning">Option 3</span>
+                                    <span class="badge bg-danger">Option 4</span>
+                                </div>
+                                <small class="text-muted">div#optionContainer with 4 span.badge elements</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function logout() {
+            window.scrollTo(0, 0);
+            window.location.href = '../index.html';
+        }
+
+        function toggleVisibility() {
+            const visible = document.getElementById('visibleElement');
+            const hidden = document.getElementById('hiddenElement');
+            visible.style.display = visible.style.display === 'none' ? 'block' : 'none';
+            hidden.style.display = hidden.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleDisabled() {
+            const input = document.getElementById('disabledInput');
+            input.disabled = !input.disabled;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="site-footer"></footer>
+</body>
+</html>

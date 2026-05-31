@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Elements Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script src="../../components/include.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+    <style>
+        .dynamic-box {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .progress-container { height: 30px; border-radius: 15px; overflow: hidden; background: #e2e8f0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); border-radius: 15px; transition: width 0.3s ease; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: 0.85rem; }
+        .counter-display { font-size: 4rem; font-weight: 700; color: var(--primary); font-family: 'Segoe UI', monospace; min-width: 120px; text-align: center; }
+        .counter-btn { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); background: #fff; color: var(--primary); font-size: 1.5rem; font-weight: 700; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; }
+        .counter-btn:hover { background: var(--primary); color: #fff; }
+        .skeleton { background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+        .skeleton-title { height: 28px; width: 60%; margin-bottom: 12px; }
+        .skeleton-text { height: 16px; width: 100%; margin-bottom: 8px; }
+        .skeleton-text.short { width: 75%; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .toast-notification {
+            position: fixed; top: 20px; right: 20px; background: var(--success); color: #fff;
+            padding: 1rem 1.5rem; border-radius: 10px; font-weight: 600; box-shadow: var(--shadow-lg);
+            transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 9999; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .toast-notification.show { transform: translateX(0); }
+        .loaded-content { animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .status-badge { display: inline-block; padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .status-success { background: #dcfce7; color: #166534; }
+        .status-warning { background: #fef9c3; color: #854d0e; }
+        .status-error { background: #fce4ec; color: #b71c1c; }
+        .status-info { background: #dbeafe; color: #1e40af; }
+    </style>
+</head>
+<body>
+    <a href="#dynamic-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+    <div class="site-header"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast-message" class="toast-notification">🔔 Action completed successfully!</div>
+
+    <main id="dynamic-main" class="container py-5" role="main" tabindex="-1">
+        <div class="text-center mb-5">
+            <h1 class="page-title">⚡ Dynamic Elements</h1>
+            <p class="text-muted">Practice explicit waits, visibility checks, and interacting with elements that change over time.</p>
+        </div>
+
+        <!-- 1. Show / Hide Element -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Show / Hide Element</h5></div>
+            <div class="card-body">
+                <p class="text-muted">Toggle element visibility. Practice <code>is_displayed()</code> and explicit waits.</p>
+                <div class="d-flex gap-2 mb-3">
+                    <button class="btn btn-success" id="show-element-btn" onclick="showDynamicBox()">Show Element</button>
+                    <button class="btn btn-danger" id="hide-element-btn" onclick="hideDynamicBox()">Hide Element</button>
+                    <button class="btn btn-warning" id="toggle-element-btn" onclick="toggleDynamicBox()">Toggle Element</button>
+                </div>
+                <div id="dynamic-box" class="dynamic-box" style="display: none;" data-testid="dynamic-box">
+                    ✅ I am now visible! You can interact with me.
+                </div>
+                <div id="visibility-result" class="alert alert-info mt-3 d-none" data-testid="visibility-result"></div>
+            </div>
+        </div>
+
+        <!-- 2. Delayed Element Appearance -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Delayed Element Appearance</h5></div>
+            <div class="card-body">
+                <p class="text-muted">Click the button — the element will appear after a <strong>3-second delay</strong>. Practice explicit waits.</p>
+                <button class="btn btn-primary" id="load-delayed-btn" onclick="loadDelayedElement()">Load Delayed Element</button>
+                <div id="delayed-loader" class="mt-3 d-none">
+                    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+                    <span class="ms-2">Loading element...</span>
+                </div>
+                <div id="delayed-element" class="alert alert-success mt-3 d-none" data-testid="delayed-element">
+                    <strong>🎉 Element Loaded!</strong> This element appeared after a 3-second delay.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Loading Progress Bar -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Loading Progress Bar</h5></div>
+            <div class="card-body">
+                <p class="text-muted">Start the progress bar and wait for it to reach 100%.</p>
+                <button class="btn btn-primary" id="start-progress-btn" onclick="startProgress()">Start Progress</button>
+                <button class="btn btn-outline-secondary ms-2" id="reset-progress-btn" onclick="resetProgress()">Reset</button>
+                <div class="progress-container mt-3">
+                    <div id="progress-bar" class="progress-fill" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-testid="progress-bar">0%</div>
+                </div>
+                <div id="progress-result" class="alert alert-success mt-3 d-none" data-testid="progress-result">
+                    <strong>✅ Progress Complete!</strong> The bar reached 100%.
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Interactive Counter -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Interactive Counter</h5></div>
+            <div class="card-body">
+                <p class="text-muted">Increment, decrement, and reset the counter. Practice reading dynamic text values.</p>
+                <div class="d-flex align-items-center justify-content-center gap-4 my-4">
+                    <button class="counter-btn" id="decrement-btn" onclick="updateCounter(-1)" data-testid="decrement-btn">−</button>
+                    <div id="counter-value" class="counter-display" data-count="0" data-testid="counter-value">0</div>
+                    <button class="counter-btn" id="increment-btn" onclick="updateCounter(1)" data-testid="increment-btn">+</button>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-outline-secondary btn-sm" id="reset-counter-btn" onclick="resetCounter()" data-testid="reset-counter-btn">Reset Counter</button>
+                </div>
+                <div id="counter-result" class="alert alert-info mt-3 d-none" data-testid="counter-result"></div>
+            </div>
+        </div>
+
+        <!-- 5. Skeleton Loader → Real Content -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Skeleton Loader → Real Content</h5></div>
+            <div class="card-body">
+                <p class="text-muted">Simulates a real-world loading pattern. Content loads after 2.5 seconds.</p>
+                <button class="btn btn-primary" id="simulate-load-btn" onclick="simulatePageLoad()">Simulate Page Load</button>
+                <div id="skeleton-wrapper" class="mt-3 d-none" data-testid="skeleton-wrapper">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                    <div class="skeleton skeleton-text"></div>
+                </div>
+                <div id="loaded-content" class="mt-3 d-none loaded-content" data-testid="loaded-content">
+                    <h5 id="loaded-title" data-testid="loaded-title">📄 Content Loaded Successfully</h5>
+                    <p>This content replaced the skeleton loader after 2.5 seconds. In real applications, this simulates API data loading.</p>
+                    <p class="mb-0 text-muted">Author: <strong>Test Automation Practice</strong> · Published: <span id="load-timestamp"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Dynamic Changing Text -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Dynamic Changing Text</h5></div>
+            <div class="card-body">
+                <p class="text-muted">Each click loads a random status message. Practice asserting dynamic text content.</p>
+                <button class="btn btn-primary" id="generate-status-btn" onclick="generateRandomStatus()">Generate Random Status</button>
+                <div id="dynamic-text-element" class="alert alert-secondary mt-3" data-testid="dynamic-text-element">
+                    Click the button to generate a status message.
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Toast Notification -->
+        <div class="card mb-4">
+            <div class="card-header"><h5 class="mb-0">Toast Notification</h5></div>
+            <div class="card-body">
+                <p class="text-muted">A toast appears for 3 seconds then disappears. Practice waiting for it to appear and disappear.</p>
+                <button class="btn btn-primary" id="show-toast-btn" onclick="showToast()">Show Toast Notification</button>
+                <div id="toast-status" class="alert alert-info mt-3 d-none" data-testid="toast-status"></div>
+            </div>
+        </div>
+    </main>
+
+        <footer class="site-footer" role="contentinfo">
+                <p>&copy; 2024 AA Practice Test Automation — Built for Test Automation Students</p>
+        </footer>
+<style>
+.visually-hidden-focusable.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+.visually-hidden-focusable.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1em;
+    background: #6366f1;
+    color: #fff;
+    border-radius: 6px;
+    outline: 3px solid #4AAE9B;
+    text-decoration: underline;
+}
+</style>
+
+    <script src="../JavaScript/script.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            checkLoginStatus('../Pages/dynamic-elements.html');
+        });
+
+        // 1. Show/Hide
+        function showDynamicBox() {
+            const box = document.getElementById('dynamic-box');
+            box.style.display = 'block';
+            showResult('visibility-result', '✅ Element is now VISIBLE (is_displayed() → true)', 'alert-success');
+        }
+        function hideDynamicBox() {
+            const box = document.getElementById('dynamic-box');
+            box.style.display = 'none';
+            showResult('visibility-result', '❌ Element is now HIDDEN (is_displayed() → false)', 'alert-warning');
+        }
+        function toggleDynamicBox() {
+            const box = document.getElementById('dynamic-box');
+            if (box.style.display === 'none') { showDynamicBox(); } else { hideDynamicBox(); }
+        }
+
+        // 2. Delayed Element
+        function loadDelayedElement() {
+            const btn = document.getElementById('load-delayed-btn');
+            const loader = document.getElementById('delayed-loader');
+            const element = document.getElementById('delayed-element');
+            btn.disabled = true;
+            loader.classList.remove('d-none');
+            element.classList.add('d-none');
+            setTimeout(function() {
+                loader.classList.add('d-none');
+                element.classList.remove('d-none');
+                btn.disabled = false;
+            }, 3000);
+        }
+
+        // 3. Progress Bar
+        let progressInterval = null;
+        function startProgress() {
+            const bar = document.getElementById('progress-bar');
+            const result = document.getElementById('progress-result');
+            const btn = document.getElementById('start-progress-btn');
+            let value = parseInt(bar.getAttribute('aria-valuenow')) || 0;
+            if (value >= 100) return;
+            btn.disabled = true;
+            result.classList.add('d-none');
+            progressInterval = setInterval(function() {
+                value += Math.floor(Math.random() * 5) + 1;
+                if (value > 100) value = 100;
+                bar.style.width = value + '%';
+                bar.textContent = value + '%';
+                bar.setAttribute('aria-valuenow', value);
+                if (value >= 100) {
+                    clearInterval(progressInterval);
+                    btn.disabled = false;
+                    result.classList.remove('d-none');
+                }
+            }, 150);
+        }
+        function resetProgress() {
+            clearInterval(progressInterval);
+            const bar = document.getElementById('progress-bar');
+            bar.style.width = '0%';
+            bar.textContent = '0%';
+            bar.setAttribute('aria-valuenow', '0');
+            document.getElementById('progress-result').classList.add('d-none');
+            document.getElementById('start-progress-btn').disabled = false;
+        }
+
+        // 4. Counter
+        function updateCounter(change) {
+            const el = document.getElementById('counter-value');
+            let count = parseInt(el.getAttribute('data-count')) + change;
+            el.setAttribute('data-count', count);
+            el.textContent = count;
+            showResult('counter-result', 'Counter value: ' + count + ' (data-count="' + count + '")', 'alert-info');
+        }
+        function resetCounter() {
+            const el = document.getElementById('counter-value');
+            el.setAttribute('data-count', '0');
+            el.textContent = '0';
+            showResult('counter-result', 'Counter reset to 0', 'alert-secondary');
+        }
+
+        // 5. Skeleton Loader
+        function simulatePageLoad() {
+            const btn = document.getElementById('simulate-load-btn');
+            const skeleton = document.getElementById('skeleton-wrapper');
+            const content = document.getElementById('loaded-content');
+            btn.disabled = true;
+            content.classList.add('d-none');
+            skeleton.classList.remove('d-none');
+            setTimeout(function() {
+                skeleton.classList.add('d-none');
+                content.classList.remove('d-none');
+                document.getElementById('load-timestamp').textContent = new Date().toLocaleString();
+                btn.disabled = false;
+            }, 2500);
+        }
+
+        // 6. Dynamic Text
+        const statuses = [
+            { text: '✅ Success — All tests passed!', cls: 'alert-success', badge: 'status-success' },
+            { text: '⚠️ Warning — 3 tests skipped', cls: 'alert-warning', badge: 'status-warning' },
+            { text: '❌ Error — 2 tests failed', cls: 'alert-danger', badge: 'status-error' },
+            { text: 'ℹ️ Info — Test suite in progress', cls: 'alert-info', badge: 'status-info' },
+            { text: '✅ Success — Deployment complete', cls: 'alert-success', badge: 'status-success' },
+            { text: '⚠️ Warning — High memory usage detected', cls: 'alert-warning', badge: 'status-warning' },
+            { text: '❌ Error — Connection timeout', cls: 'alert-danger', badge: 'status-error' },
+            { text: 'ℹ️ Info — Running smoke tests...', cls: 'alert-info', badge: 'status-info' },
+        ];
+        function generateRandomStatus() {
+            const el = document.getElementById('dynamic-text-element');
+            const status = statuses[Math.floor(Math.random() * statuses.length)];
+            el.className = 'alert mt-3 ' + status.cls;
+            el.textContent = status.text;
+        }
+
+        // 7. Toast
+        function showToast() {
+            const toast = document.getElementById('toast-message');
+            const status = document.getElementById('toast-status');
+            toast.classList.add('show');
+            showResult('toast-status', '🔔 Toast is VISIBLE — will auto-hide in 3 seconds', 'alert-success');
+            setTimeout(function() {
+                toast.classList.remove('show');
+                showResult('toast-status', '🔕 Toast has DISAPPEARED', 'alert-secondary');
+            }, 3000);
+        }
+
+        // Helper
+        function showResult(id, msg, cls) {
+            const el = document.getElementById(id);
+            el.className = 'alert mt-3 ' + cls;
+            el.textContent = msg;
+            el.classList.remove('d-none');
+        }
+
+        function logout() {
+            sessionStorage.setItem('isLoggedIn', 'false');
+            window.scrollTo(0, 0);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

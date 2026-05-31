@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topics - Automation Practice</title>
+    <link rel="icon" href="../Images/test-automation-practice-logo.png">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../Styles/styles.css">
+    <script src="../components/include.js"></script>
+</head>
+
+<body>
+    <a href="#topics-main" class="visually-hidden-focusable skip-link" tabindex="0">Skip to main content</a>
+    <div class="site-header"></div>
+    <script src="../JavaScript/auth.js"></script>
+    <script src="../JavaScript/nav.js"></script>
+    <script>enforceAuth('../index.html');</script>
+
+    <main id="topics-main" class="container py-4" role="main" tabindex="-1">
+        <div class="text-center mb-4">
+            <h1 class="page-title">All Topics</h1>
+            <p class="text-muted">25+ automation topics to practice</p>
+        </div>
+
+        <!-- Topics Table -->
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0" role="table" aria-label="Automation Topics">
+                        <thead class="table-light" role="rowgroup">
+                            <tr role="row">
+                                <th scope="col">#</th>
+                                <th scope="col">Topic</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Practice Page</th>
+                            </tr>
+                        </thead>
+                        <tbody role="rowgroup">
+                            <tr role="row"><td tabindex="0">1</td><td>Element Locators</td><td><span class="badge bg-primary">Locators</span></td><td><a href="#" onclick="window.location.href=getRelativePath('locators/id-locators.html')">ID Locators</a></td></tr>
+                            <tr role="row"><td tabindex="0">2</td><td>CSS Selectors</td><td><span class="badge bg-primary">Locators</span></td><td><a href="#" onclick="window.location.href=getRelativePath('locators/css-selectors.html')">CSS Selectors</a></td></tr>
+                            <tr role="row"><td tabindex="0">3</td><td>XPath Selectors</td><td><span class="badge bg-primary">Locators</span></td><td><a href="#" onclick="window.location.href=getRelativePath('locators/xpath-selectors.html')">XPath Selectors</a></td></tr>
+                            <tr role="row"><td tabindex="0">4</td><td>Click Interactions</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('basic-actions/clicking.html')">Clicking</a></td></tr>
+                            <tr role="row"><td tabindex="0">5</td><td>Text Inputs</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('basic-actions/sendData.html')">Text Inputs</a></td></tr>
+                            <tr role="row"><td tabindex="0">6</td><td>Checkboxes</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('basic-actions/checkbox_Radio.html')">Checkboxes</a></td></tr>
+                            <tr role="row"><td tabindex="0">7</td><td>Radio Buttons</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('basic-actions/checkbox_Radio.html')">Radio</a></td></tr>
+                            <tr role="row"><td tabindex="0">8</td><td>Dropdown List</td><td><span class="badge bg-warning">Forms</span></td><td><a href="#" onclick="window.location.href=getRelativePath('form-controls/dropDown.html')">Dropdowns</a></td></tr>
+                            <tr role="row"><td tabindex="0">9</td><td>Date Picker</td><td><span class="badge bg-warning">Forms</span></td><td><a href="#" onclick="window.location.href=getRelativePath('form-controls/datePicker.html')">Date Picker</a></td></tr>
+                            <tr role="row"><td tabindex="0">10</td><td>Sliders</td><td><span class="badge bg-warning">Forms</span></td><td><a href="#" onclick="window.location.href=getRelativePath('form-controls/slider.html')">Slider</a></td></tr>
+                            <tr role="row"><td tabindex="0">11</td><td>Mouse Hover</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('mouse-keyboard/mouse.html')">Mouse</a></td></tr>
+                            <tr role="row"><td tabindex="0">12</td><td>Drag and Drop</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('mouse-keyboard/dragDrop.html')">Drag Drop</a></td></tr>
+                            <tr role="row"><td tabindex="0">13</td><td>Keyboard Keys</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('mouse-keyboard/keyboard.html')">Keyboard</a></td></tr>
+                            <tr role="row"><td tabindex="0">14</td><td>Scrolling</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('mouse-keyboard/scrolling.html')">Scrolling</a></td></tr>
+                            <tr role="row"><td tabindex="0">15</td><td>Frames</td><td><span class="badge" style="background:#8b5cf6;">Advanced</span></td><td><a href="#" onclick="window.location.href=getRelativePath('frames-windows/frames.html')">Frames</a></td></tr>
+                            <tr role="row"><td tabindex="0">16</td><td>Windows/Tabs</td><td><span class="badge" style="background:#8b5cf6;">Advanced</span></td><td><a href="#" onclick="window.location.href=getRelativePath('frames-windows/multiple-windows.html')">Windows</a></td></tr>
+                            <tr role="row"><td tabindex="0">17</td><td>Alerts</td><td><span class="badge" style="background:#8b5cf6;">Advanced</span></td><td><a href="#" onclick="window.location.href=getRelativePath('dialogs/alerts.html')">Alerts</a></td></tr>
+                            <tr role="row"><td tabindex="0">18</td><td>Tables</td><td><span class="badge bg-success">Actions</span></td><td><a href="#" onclick="window.location.href=getRelativePath('tables/tables.html')">Tables</a></td></tr>
+                            <tr role="row"><td tabindex="0">19</td><td>Waits</td><td><span class="badge bg-warning">Forms</span></td><td><a href="#" onclick="window.location.href=getRelativePath('waits-synchronization/explicit-waits.html')">Waits</a></td></tr>
+                            <tr role="row"><td tabindex="0">19</td><td>File Upload</td><td><span class="badge bg-info">API</span></td><td><a href="#" onclick="window.location.href=getRelativePath('file-operations/uploadFile.html')">Upload</a></td></tr>
+                            <tr role="row"><td tabindex="0">20</td><td>GET Request</td><td><span class="badge bg-info">API</span></td><td><a href="api-testing/api-testing.html">API Testing</a></td></tr>
+                            <tr role="row"><td tabindex="0">21</td><td>POST Request</td><td><span class="badge bg-info">API</span></td><td><a href="api-testing/api-testing.html">API Testing</a></td></tr>
+                            <tr role="row"><td tabindex="0">22</td><td>Cookies</td><td><span class="badge" style="background:#8b5cf6;">Advanced</span></td><td><a href="storage/cookies.html">Cookies</a></td></tr>
+                            <tr role="row"><td tabindex="0">23</td><td>Visual Testing</td><td><span class="badge" style="background:#ec4899;">Visual</span></td><td><a href="visual-testing/visual-testing.html">Visual</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="main.html" class="btn btn-primary">Start Practicing</a>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo"></footer>
+    <style>
+    .visually-hidden-focusable.skip-link {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 10000;
+    }
+    .visually-hidden-focusable.skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0.5em 1em;
+        background: #6366f1;
+        color: #fff;
+        border-radius: 6px;
+        outline: 3px solid #4AAE9B;
+        text-decoration: underline;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

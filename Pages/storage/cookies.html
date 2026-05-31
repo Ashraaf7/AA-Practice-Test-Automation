@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies & Storage Practice</title>
+    <link rel="icon" href="../../Images/test-automation-practice-logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../Styles/styles.css">
+    <script src="../../components/include.js"></script>
+</head>
+<body>
+    <div class="site-header"></div>
+    <script src="../../JavaScript/auth.js"></script>
+    <script src="../../JavaScript/nav.js"></script>
+    <script>enforceAuth('../../index.html');</script>
+
+        <main class="container-lg py-4">
+            <div class="card shadow-sm p-4 mb-4" style="max-width: 700px; margin: 0 auto; background: var(--card-bg);">
+                <div class="mb-4 text-center">
+                    <h1 class="page-title mb-1" style="color:var(--primary-dark);font-weight:800;">Cookies & Storage Practice</h1>
+                    <div class="page-subtitle" style="color:var(--text-secondary);font-size:1.1rem;">Explore browser storage APIs for automation</div>
+                </div>
+                <div class="mb-5">
+                    <h6>1. Cookies</h6>
+                    <p class="text-muted">Persistent data sent with HTTP requests</p>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <button id="setCookie" class="btn btn-primary" data-testid="set-cookie">Set Cookie</button>
+                        <button id="getCookie" class="btn btn-info" data-testid="get-cookie">Get Cookie</button>
+                        <button id="deleteCookie" class="btn btn-danger" data-testid="delete-cookie">Delete Cookie</button>
+                    </div>
+                    <div id="cookieResult" class="alert d-none mt-3" data-testid="cookie-result"><span id="cookieMessage"></span></div>
+                    <pre class="bg-light p-3 mt-3" id="cookieDisplay" data-testid="cookie-display">No cookies set yet</pre>
+                </div>
+                <div class="mb-5">
+                    <h6>2. LocalStorage</h6>
+                    <p class="text-muted">Persistent data stored locally (survives browser restart)</p>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-6">
+                            <label for="storageKey" class="form-label">Key:</label>
+                            <input type="text" id="storageKey" class="form-control" placeholder="Enter key" value="userPreference" data-testid="storage-key">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="storageValue" class="form-label">Value:</label>
+                            <input type="text" id="storageValue" class="form-control" placeholder="Enter value" value="dark-mode" data-testid="storage-value">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <button id="setStorage" class="btn btn-success" data-testid="set-storage">Set LocalStorage</button>
+                        <button id="getStorage" class="btn btn-info" data-testid="get-storage">Get LocalStorage</button>
+                        <button id="deleteStorage" class="btn btn-danger" data-testid="delete-storage">Delete LocalStorage</button>
+                        <button id="clearStorage" class="btn btn-dark" data-testid="clear-storage">Clear All</button>
+                    </div>
+                    <div id="storageResult" class="alert d-none mt-3" data-testid="storage-result"><span id="storageMessage"></span></div>
+                    <pre class="bg-light p-3 mt-3" id="storageDisplay" data-testid="storage-display">No LocalStorage items yet</pre>
+                </div>
+                <div class="mb-5">
+                    <h6>3. SessionStorage</h6>
+                    <p class="text-muted">Temporary data cleared when tab closes</p>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <button id="setSession" class="btn btn-primary" data-testid="set-session">Set SessionStorage</button>
+                        <button id="getSession" class="btn btn-info" data-testid="get-session">Get SessionStorage</button>
+                        <button id="deleteSession" class="btn btn-danger" data-testid="delete-session">Delete SessionStorage</button>
+                    </div>
+                    <div id="sessionResult" class="alert d-none mt-3" data-testid="session-result"><span id="sessionMessage"></span></div>
+                    <pre class="bg-light p-3 mt-3" id="sessionDisplay" data-testid="session-display">No SessionStorage items yet</pre>
+                </div>
+                <div class="mb-4">
+                    <h6>Comparison</h6>
+                    <table class="table table-bordered table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Feature</th>
+                                <th>Cookies</th>
+                                <th>LocalStorage</th>
+                                <th>SessionStorage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Capacity</strong></td><td>4KB</td><td>5-10MB</td><td>5-10MB</td></tr>
+                            <tr><td><strong>Persistence</strong></td><td>Until expiry</td><td>Permanent</td><td>Until tab closes</td></tr>
+                            <tr><td><strong>Sent with Requests</strong></td><td>Yes</td><td>No</td><td>No</td></tr>
+                            <tr><td><strong>Domain Specific</strong></td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mb-4">
+                    <h6>Working with JSON Objects</h6>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <button id="setJsonStorage" class="btn btn-success" data-testid="set-json">Store JSON Object</button>
+                        <button id="getJsonStorage" class="btn btn-info" data-testid="get-json">Retrieve JSON Object</button>
+                    </div>
+                    <div id="jsonResult" class="alert d-none mt-3" data-testid="json-result"><span id="jsonMessage"></span></div>
+                    <pre class="bg-light p-3 mt-3" id="jsonDisplay" data-testid="json-display">{
+            </div>
+        </div>
+    </div>
+
+                </div>
+                <div class="mb-4">
+                    <button id="viewAll" class="btn btn-secondary" data-testid="view-all">View All Storage Data</button>
+                    <pre class="bg-light p-3 mt-3" id="allData" data-testid="all-data">No storage data to display</pre>
+                </div>
+            </div>
+        </main>
+    <script src="../JavaScript/script.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            checkLoginStatus('../../Pages/storage/cookies.html');
+            updateAllStorageDisplays();
+        });
+
+        function updateAllStorageDisplays() {
+            // Update cookie display
+            document.getElementById('cookieDisplay').textContent = document.cookie || 'No cookies set';
+
+            // Update localStorage display
+            const localItems = Object.keys(localStorage).map(key => `${key}: ${localStorage.getItem(key)}`).join('\n');
+            document.getElementById('storageDisplay').textContent = localItems || 'No LocalStorage items yet';
+
+            // Update sessionStorage display
+            const sessionItems = Object.keys(sessionStorage).map(key => `${key}: ${sessionStorage.getItem(key)}`).join('\n');
+            document.getElementById('sessionDisplay').textContent = sessionItems || 'No SessionStorage items yet';
+        }
+
+        // Cookies
+        document.getElementById('setCookie')?.addEventListener('click', function() {
+            document.cookie = 'testAutomation=active; path=/; max-age=3600';
+            document.cookie = 'userRole=tester; path=/; max-age=3600';
+            const result = document.getElementById('cookieResult');
+            result.className = 'alert alert-success mt-3';
+            document.getElementById('cookieMessage').textContent = '✓ Cookies set successfully!';
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        document.getElementById('getCookie')?.addEventListener('click', function() {
+            const result = document.getElementById('cookieResult');
+            if (document.cookie) {
+                result.className = 'alert alert-info mt-3';
+                document.getElementById('cookieMessage').textContent = `✓ Cookies retrieved: ${document.cookie}`;
+            } else {
+                result.className = 'alert alert-warning mt-3';
+                document.getElementById('cookieMessage').textContent = '⚠ No cookies found';
+            }
+            result.classList.remove('d-none');
+        });
+
+        document.getElementById('deleteCookie')?.addEventListener('click', function() {
+            document.cookie = 'testAutomation=; max-age=0';
+            document.cookie = 'userRole=; max-age=0';
+            const result = document.getElementById('cookieResult');
+            result.className = 'alert alert-info mt-3';
+            document.getElementById('cookieMessage').textContent = '✓ Cookies deleted!';
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        // LocalStorage
+        document.getElementById('setStorage')?.addEventListener('click', function() {
+            const key = document.getElementById('storageKey').value;
+            const value = document.getElementById('storageValue').value;
+            localStorage.setItem(key, value);
+
+            const result = document.getElementById('storageResult');
+            result.className = 'alert alert-success mt-3';
+            document.getElementById('storageMessage').textContent = `✓ Stored: ${key} = ${value}`;
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        document.getElementById('getStorage')?.addEventListener('click', function() {
+            const key = document.getElementById('storageKey').value;
+            const value = localStorage.getItem(key);
+
+            const result = document.getElementById('storageResult');
+            if (value) {
+                result.className = 'alert alert-info mt-3';
+                document.getElementById('storageMessage').textContent = `✓ Retrieved: ${key} = ${value}`;
+            } else {
+                result.className = 'alert alert-warning mt-3';
+                document.getElementById('storageMessage').textContent = `⚠ Key not found: ${key}`;
+            }
+            result.classList.remove('d-none');
+        });
+
+        document.getElementById('deleteStorage')?.addEventListener('click', function() {
+            const key = document.getElementById('storageKey').value;
+            localStorage.removeItem(key);
+
+            const result = document.getElementById('storageResult');
+            result.className = 'alert alert-info mt-3';
+            document.getElementById('storageMessage').textContent = `✓ Deleted: ${key}`;
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        document.getElementById('clearStorage')?.addEventListener('click', function() {
+            localStorage.clear();
+            const result = document.getElementById('storageResult');
+            result.className = 'alert alert-danger mt-3';
+            document.getElementById('storageMessage').textContent = '✓ All LocalStorage cleared!';
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        // SessionStorage
+        document.getElementById('setSession')?.addEventListener('click', function() {
+            sessionStorage.setItem('sessionTest', 'active');
+            sessionStorage.setItem('sessionUser', 'automation-tester');
+
+            const result = document.getElementById('sessionResult');
+            result.className = 'alert alert-success mt-3';
+            document.getElementById('sessionMessage').textContent = '✓ SessionStorage set!';
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        document.getElementById('getSession')?.addEventListener('click', function() {
+            const value = sessionStorage.getItem('sessionTest');
+            const result = document.getElementById('sessionResult');
+            result.className = 'alert alert-info mt-3';
+            document.getElementById('sessionMessage').textContent = `✓ SessionStorage value: ${value}`;
+            result.classList.remove('d-none');
+        });
+
+        document.getElementById('deleteSession')?.addEventListener('click', function() {
+            sessionStorage.clear();
+            const result = document.getElementById('sessionResult');
+            result.className = 'alert alert-info mt-3';
+            document.getElementById('sessionMessage').textContent = '✓ SessionStorage cleared!';
+            result.classList.remove('d-none');
+            updateAllStorageDisplays();
+        });
+
+        // JSON Storage
+        document.getElementById('setJsonStorage')?.addEventListener('click', function() {
+            const userData = {
+                username: 'testuser',
+                email: 'test@automation.com',
+                theme: 'dark',
+                preferences: { language: 'en', notifications: true }
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            const result = document.getElementById('jsonResult');
+            result.className = 'alert alert-success mt-3';
+            document.getElementById('jsonMessage').textContent = '✓ JSON object stored!';
+            result.classList.remove('d-none');
+            document.getElementById('jsonDisplay').textContent = JSON.stringify(userData, null, 2);
+            updateAllStorageDisplays();
+        });
+
+        document.getElementById('getJsonStorage')?.addEventListener('click', function() {
+            const data = localStorage.getItem('userData');
+            const result = document.getElementById('jsonResult');
+
+            if (data) {
+                const parsed = JSON.parse(data);
+                result.className = 'alert alert-success mt-3';
+                document.getElementById('jsonMessage').textContent = '✓ JSON object retrieved!';
+                document.getElementById('jsonDisplay').textContent = JSON.stringify(parsed, null, 2);
+            } else {
+                result.className = 'alert alert-warning mt-3';
+                document.getElementById('jsonMessage').textContent = '⚠ No JSON object found';
+            }
+            result.classList.remove('d-none');
+        });
+
+        // View All
+        document.getElementById('viewAll')?.addEventListener('click', function() {
+            const allData = {
+                cookies: document.cookie ? 'Present' : 'None',
+                localStorage: { ...localStorage },
+                sessionStorage: { ...sessionStorage }
+            };
+            document.getElementById('allData').textContent = JSON.stringify(allData, null, 2);
+        });
+        function logout() {
+            if (typeof doLogout === 'function') {
+                doLogout();
+            } else {
+                window.scrollTo(0, 0);
+                window.location.href = getRelativePath('index.html');
+            }
+        }
+    </script>
+
+    <footer class="site-footer"></footer>
+</body>
+</html>
