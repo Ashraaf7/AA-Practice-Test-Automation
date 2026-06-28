@@ -179,15 +179,17 @@
             <form id="loginForm" novalidate autocomplete="off" style="width:100%;" aria-label="Login form">
                 <div class="mb-3">
                     <label for="inputUsername" class="form-label">Username</label>
-                    <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus
+                    <input automation-id='username-input' ria-label="user" type="text" id="inputUsername"
+                        class="form-control" placeholder="Enter your username" required autofocus
                         autocomplete="username" aria-describedby="usernameError">
                     <div class="invalid-feedback" id="usernameError" role="alert" aria-live="polite" aria-atomic="true">
                         Username is required.</div>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
-                        autocomplete="current-password" aria-describedby="passwordError">
+                    <input automation-id='password-input' type="password" id="inputPassword" class="form-control"
+                        placeholder="Enter your password" required autocomplete="current-password"
+                        aria-describedby="passwordError">
                     <div class="invalid-feedback" id="passwordError" role="alert" aria-live="polite" aria-atomic="true">
                         Password is required.</div>
                 </div>
@@ -198,7 +200,8 @@
                 </div>
                 <div class="alert alert-danger d-none" id="loginError" role="alert" aria-live="assertive"
                     aria-atomic="true">Invalid credentials. Use <b>admin/admin</b></div>
-                <button class="btn-login text-white" type="submit" aria-label="Sign in to your account">Sign In</button>
+                <button automation-id='login-button' title="za3bola" class="btn-login text-white" type="submit"
+                    aria-label="Sign in to your account">Sign In</button>
                 <div class="text-center mt-3" style="color:#64748b; font-size:0.98rem;" role="note">
                     <span
                         style="background:#f1f5f9; border-radius:6px; padding:3px 10px; display:inline-block;"><strong>Demo
